@@ -1,0 +1,188 @@
+\hypertarget{classMenu}{}\section{Menu Class Reference}
+\label{classMenu}\index{Menu@{Menu}}
+
+
+{\ttfamily \#include $<$menu.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMenu_a0c1481a62f6b0bf63a506d2622f2244f}{Menu} (void)
+\item 
+void \hyperlink{classMenu_afb39c20804f4f50787c99ca416e4b92f}{show\+Dorm\+List} (ostream \&ostr)
+\item 
+\hyperlink{classDorm}{Dorm} \& \hyperlink{classMenu_a06939a393f444b69994608b6bbcf3a22}{operator\mbox{[}$\,$\mbox{]}} (int n)
+\item 
+int \hyperlink{classMenu_ae4014d4d44394bd61e635aeee6b7531b}{get\+Dorm\+Qty} (void)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{classMenu_a9a3436ae4e0a14be7089401f95a744f7}{makecopy} (const char $\ast$ch)
+\item 
+char $\ast$ \hyperlink{classMenu_abe606f4e72a307c59981dd44105b37ce}{pull\+Dorm\+Id} (const char $\ast$Machine\+Id)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classMenu_aa39029772c677e7117aff6ba6f9251aa}{Dorm\+Qty}
+\item 
+\hyperlink{classDorm}{Dorm} $\ast$$\ast$ \hyperlink{classMenu_a20f246a970fbd30dd0d38a8b5ab7c6a9}{All\+Dorm\+List}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classMenu_a0c1481a62f6b0bf63a506d2622f2244f}{}\index{Menu@{Menu}!Menu@{Menu}}
+\index{Menu@{Menu}!Menu@{Menu}}
+\subsubsection[{Menu(void)}]{\setlength{\rightskip}{0pt plus 5cm}Menu\+::\+Menu (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{classMenu_a0c1481a62f6b0bf63a506d2622f2244f}
+
+\begin{DoxyCode}
+6               \{
+7         ifstream dormstream;
+8         dormstream.open(\textcolor{stringliteral}{"dormlist.dat"});
+9         \textcolor{keywordflow}{if} (dormstream.is\_open())\{
+10         dormstream>>\hyperlink{classMenu_aa39029772c677e7117aff6ba6f9251aa}{DormQty}; 
+11             \hyperlink{classMenu_a20f246a970fbd30dd0d38a8b5ab7c6a9}{AllDormList}=\textcolor{keyword}{new} \hyperlink{classDorm}{Dorm} *[\hyperlink{classMenu_aa39029772c677e7117aff6ba6f9251aa}{DormQty}];
+12             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<\hyperlink{classMenu_aa39029772c677e7117aff6ba6f9251aa}{DormQty}; i++)\{
+13                 \textcolor{keywordtype}{char} name[10];                                \textcolor{comment}{//this will take the fisrt string which is
+       the form of ell-02-123-l }
+14                 dormstream >> name;
+15                 \textcolor{comment}{//cout<<name<<endl;}
+16                 \textcolor{keywordtype}{char} \textcolor{keywordtype}{id}[4]; 
+17                 dormstream>>id; 
+18                 \textcolor{comment}{//cout<<id<<endl;}
+19                 \hyperlink{classMenu_a20f246a970fbd30dd0d38a8b5ab7c6a9}{AllDormList}[i]= \textcolor{keyword}{new} \hyperlink{classDorm}{Dorm}(name, \textcolor{keywordtype}{id});         \textcolor{comment}{//based on the dorm constructor,
+       it should take a sting and a number. }
+20                 \textcolor{comment}{//make guards here later to make it foolproof}
+21                 \textcolor{comment}{//right now the hall will be in file line Hoyme hmh, but make it such that it  can read two
+       or more words}
+22             \}
+23             dormstream.close();
+24         \}
+25         \textcolor{keywordflow}{else} cout<<\textcolor{stringliteral}{"--Unable to open dormlist file.--"}<<endl;
+26         
+27         ifstream codestream;
+28         codestream.open(\textcolor{stringliteral}{"codelist.dat"});
+29         \textcolor{keywordflow}{if} (codestream.is\_open())\{
+30             \textcolor{keywordtype}{int} n;
+31             \textcolor{keywordtype}{int} pass=0;
+32             codestream>>n;
+33             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<n; i++)\{
+34                 \textcolor{keywordtype}{char} MachineId[13];
+35                 codestream>> MachineId;
+36                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0; j<\hyperlink{classMenu_aa39029772c677e7117aff6ba6f9251aa}{DormQty}; j++)\{
+37                     \textcolor{keywordflow}{if} (!strcmp(\hyperlink{classMenu_a20f246a970fbd30dd0d38a8b5ab7c6a9}{AllDormList}[j]->getDormId(),
+      \hyperlink{classMenu_abe606f4e72a307c59981dd44105b37ce}{pullDormId}(MachineId)))\{
+38                         \hyperlink{classMenu_a20f246a970fbd30dd0d38a8b5ab7c6a9}{AllDormList}[j]->\hyperlink{classDorm_a6a29bc53aa4e1d3dd5ba9ae992825fea}{addFloor}(MachineId);
+39                         pass++;
+40                         \textcolor{keywordflow}{break};
+41                     \}
+42                 \}   
+43                 \textcolor{comment}{//count invalid entries}
+44                 \textcolor{comment}{//add guards if more or less codes than n}
+45                 \textcolor{comment}{//add guards for incorrect codes}
+46                 \textcolor{comment}{//add guards for duplicaton}
+47             \}
+48             cout<<\textcolor{stringliteral}{"Invalid entries: "}<<n-pass<<endl;
+49         \}
+50         \textcolor{keywordflow}{else} cout<<\textcolor{stringliteral}{"--Unable to open machine list file.--"}<<endl;
+51 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classMenu_ae4014d4d44394bd61e635aeee6b7531b}{}\index{Menu@{Menu}!get\+Dorm\+Qty@{get\+Dorm\+Qty}}
+\index{get\+Dorm\+Qty@{get\+Dorm\+Qty}!Menu@{Menu}}
+\subsubsection[{get\+Dorm\+Qty(void)}]{\setlength{\rightskip}{0pt plus 5cm}int Menu\+::get\+Dorm\+Qty (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{classMenu_ae4014d4d44394bd61e635aeee6b7531b}
+
+\begin{DoxyCode}
+62                         \{
+63             \textcolor{keywordflow}{return} \hyperlink{classMenu_aa39029772c677e7117aff6ba6f9251aa}{DormQty};
+64         \}\end{DoxyCode}
+\hypertarget{classMenu_a9a3436ae4e0a14be7089401f95a744f7}{}\index{Menu@{Menu}!makecopy@{makecopy}}
+\index{makecopy@{makecopy}!Menu@{Menu}}
+\subsubsection[{makecopy(const char $\ast$ch)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Menu\+::makecopy (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{ch}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classMenu_a9a3436ae4e0a14be7089401f95a744f7}
+A list array pointing to \hyperlink{classDorm}{Dorm} clas 
+\begin{DoxyCode}
+17                                     \{        \textcolor{comment}{//the makecopy fuction to create copied of c style strings}
+18     \textcolor{keywordtype}{char} * newchar;
+19     \textcolor{keywordtype}{int} i=0;
+20     \textcolor{keywordflow}{for} (i=0; ch[i]!=\textcolor{charliteral}{'\(\backslash\)0'}; i++);
+21     newchar= \textcolor{keyword}{new} \textcolor{keywordtype}{char} [i+1];
+22     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<i+1; j++)
+23         newchar[j]=ch[j];
+24     \textcolor{keywordflow}{return} newchar;
+25     \}
+\end{DoxyCode}
+\hypertarget{classMenu_a06939a393f444b69994608b6bbcf3a22}{}\index{Menu@{Menu}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!Menu@{Menu}}
+\subsubsection[{operator[](int n)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Dorm} \& Menu\+::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}\label{classMenu_a06939a393f444b69994608b6bbcf3a22}
+
+\begin{DoxyCode}
+58                             \{
+59         \textcolor{keywordflow}{return} *\hyperlink{classMenu_a20f246a970fbd30dd0d38a8b5ab7c6a9}{AllDormList}[n];
+60     \}
+\end{DoxyCode}
+\hypertarget{classMenu_abe606f4e72a307c59981dd44105b37ce}{}\index{Menu@{Menu}!pull\+Dorm\+Id@{pull\+Dorm\+Id}}
+\index{pull\+Dorm\+Id@{pull\+Dorm\+Id}!Menu@{Menu}}
+\subsubsection[{pull\+Dorm\+Id(const char $\ast$\+Machine\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Menu\+::pull\+Dorm\+Id (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{Machine\+Id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\label{classMenu_abe606f4e72a307c59981dd44105b37ce}
+
+\begin{DoxyCode}
+28                                             \{
+29     \textcolor{keywordtype}{char}* name;
+30     name= \textcolor{keyword}{new} \textcolor{keywordtype}{char}[4];
+31     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<3; i++)
+32         name[i]=MachineId[i];
+33     name[3]=\textcolor{charliteral}{'\(\backslash\)0'};
+34     \textcolor{keywordflow}{return} name;
+35     \}
+\end{DoxyCode}
+\hypertarget{classMenu_afb39c20804f4f50787c99ca416e4b92f}{}\index{Menu@{Menu}!show\+Dorm\+List@{show\+Dorm\+List}}
+\index{show\+Dorm\+List@{show\+Dorm\+List}!Menu@{Menu}}
+\subsubsection[{show\+Dorm\+List(ostream \&ostr)}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+::show\+Dorm\+List (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{ostr}
+\end{DoxyParamCaption}
+)}\label{classMenu_afb39c20804f4f50787c99ca416e4b92f}
+
+\begin{DoxyCode}
+53                                     \{
+54         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<\hyperlink{classMenu_aa39029772c677e7117aff6ba6f9251aa}{DormQty}; i++)\{
+55         ostr<<\hyperlink{classMenu_a20f246a970fbd30dd0d38a8b5ab7c6a9}{AllDormList}[i]->\hyperlink{classDorm_a901bdbaa576fb0fc4426d5b6e8779109}{getDormName}()<<endl;\}
+56       \}  
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classMenu_a20f246a970fbd30dd0d38a8b5ab7c6a9}{}\index{Menu@{Menu}!All\+Dorm\+List@{All\+Dorm\+List}}
+\index{All\+Dorm\+List@{All\+Dorm\+List}!Menu@{Menu}}
+\subsubsection[{All\+Dorm\+List}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Dorm}$\ast$$\ast$ Menu\+::\+All\+Dorm\+List\hspace{0.3cm}{\ttfamily [protected]}}\label{classMenu_a20f246a970fbd30dd0d38a8b5ab7c6a9}
+$<$ the number of Dorms \hypertarget{classMenu_aa39029772c677e7117aff6ba6f9251aa}{}\index{Menu@{Menu}!Dorm\+Qty@{Dorm\+Qty}}
+\index{Dorm\+Qty@{Dorm\+Qty}!Menu@{Menu}}
+\subsubsection[{Dorm\+Qty}]{\setlength{\rightskip}{0pt plus 5cm}int Menu\+::\+Dorm\+Qty\hspace{0.3cm}{\ttfamily [protected]}}\label{classMenu_aa39029772c677e7117aff6ba6f9251aa}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{menu_8h}{menu.\+h}\item 
+\hyperlink{menu_8cpp}{menu.\+cpp}\end{DoxyCompactItemize}

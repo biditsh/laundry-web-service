@@ -1,0 +1,8 @@
+hmh-02-124-l
+25274
+/dev/ttyACM0
+
+For new devices
+- change the first line to machine code (12 characters max)
+- change second line to serial port address for arduino
+- change third line to port number (12 characters max)

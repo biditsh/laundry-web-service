@@ -1,0 +1,195 @@
+\hypertarget{MenuDriver_8cpp}{}\section{Menu\+Driver.\+cpp File Reference}
+\label{MenuDriver_8cpp}\index{Menu\+Driver.\+cpp@{Menu\+Driver.\+cpp}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include \char`\"{}menu.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}user.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}helpers.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{MenuDriver_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{MenuDriver_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{}\index{Menu\+Driver.\+cpp@{Menu\+Driver.\+cpp}!main@{main}}
+\index{main@{main}!Menu\+Driver.\+cpp@{Menu\+Driver.\+cpp}}
+\subsubsection[{main()}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{MenuDriver_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}
+
+\begin{DoxyCode}
+8           \{
+9             \textcolor{comment}{/*ifstream dormstream;}
+10 \textcolor{comment}{        dormstream.open("dormlist.dat");}
+11 \textcolor{comment}{        int dormQty;}
+12 \textcolor{comment}{        dormstream>>dormQty;}
+13 \textcolor{comment}{        cout<<dormQty ;}
+14 \textcolor{comment}{            }
+15 \textcolor{comment}{            for (int i=0; i<dormQty; i++)\{}
+16 \textcolor{comment}{            string name;                                //this will take the fisrt string which is the form
+       of ell-02-123-l }
+17 \textcolor{comment}{            dormstream >> name;}
+18 \textcolor{comment}{            cout<<name<<endl;}
+19 \textcolor{comment}{            string id; }
+20 \textcolor{comment}{            dormstream>>id; }
+21 \textcolor{comment}{            cout<<id<<endl;}
+22 \textcolor{comment}{}
+23 \textcolor{comment}{\}*/}
+24 
+25 
+26     \hyperlink{classMenu}{Menu} m1;
+27     \hyperlink{classUser}{User} u1;
+28     cout<<m1.\hyperlink{classMenu_ae4014d4d44394bd61e635aeee6b7531b}{getDormQty}()<<endl;
+29     m1.\hyperlink{classMenu_afb39c20804f4f50787c99ca416e4b92f}{showDormList}(cout);
+30     +
+31 
+32 
+33 
+34 
+35 
+36 
+37 
+38 
+39 
+40 
+41 
+42 
+43 
+44 
+45 
+46 
+47 
+48 
+49 
+50 
+51 
+52 
+53 
+54 
+55 
+56 
+57 
+58 
+59 
+60 
+61 
+62 
+63 
+64 
+65 
+66 
+67 
+68 
+69 
+70 
+71 
+72 
+73 
+74 
+75 
+76 
+77 
+78 
+79 
+80 
+81 
+82 
+83 
+84 
+85 
+86 
+87 
+88 
+89 
+90 
+91 
+92 
+93 
+94 
+95 
+96 
+97 
+98 
+99 
+100 
+101 
+102 
+103 
+104 
+105 
+106 
+107 
+108 
+109 
+110 
+111 
+112 
+113 
+114 
+115 
+116 
+117 
+118 
+119 
+120 
+121 
+122 
+123 
+124 
+125 
+126 
+127 
+128 
+129 
+130 
+131 
+132 
+133 
+134 
+135 
+136 
+137 
+138 
+139 
+140 
+141 
+142 
+143 
+144 
+145 
+146 
+147 
+148 
+149 
+150 
+151 
+152 
+153 
+154 
+155 
+156 
+157 
+158 
+159 
+160 
+161 
+162 
+163 
+164 
+165 
+166 
+167 
+168 
+169 
+170 
+171 
+172 
+173 
+174     
+175     m1[0].showFloorList(cout);
+176     m1[0][2].showMachineList(cout);
+177     cout<<u1.\hyperlink{classUser_a74d5df47df160b5ae9c1dd1e3f338298}{getUserMachineId}()<<endl;
+178 \}\end{DoxyCode}

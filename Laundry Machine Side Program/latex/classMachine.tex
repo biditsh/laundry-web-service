@@ -1,0 +1,173 @@
+\hypertarget{classMachine}{}\section{Machine Class Reference}
+\label{classMachine}\index{Machine@{Machine}}
+
+
+{\ttfamily \#include $<$Pi\+Classes.\+h$>$}
+
+Inheritance diagram for Machine\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMachine}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMachine_a80c3b107d589a615ff42f760a5d64b32}{Machine} (void)
+\item 
+bool \hyperlink{classMachine_ad0e9081e633c3f1dd8867e7d147a261d}{Is\+Responding} (void)
+\item 
+void \hyperlink{classMachine_aae30fc95cd4f4089b79bcd680cf774eb}{set\+Response} (bool b)
+\item 
+double \hyperlink{classMachine_a2fb11e330fa5e2b6a7134ee55ac7ef43}{get\+Current\+Time} ()
+\item 
+void \hyperlink{classMachine_a2596d7951c310917a62a2be50ff62b5a}{set\+File\+As\+U\+S\+E} (int time)
+\item 
+void \hyperlink{classMachine_aa2691fd518ccf5bf91f641d168c6e67d}{set\+File\+As\+N\+O\+T\+U\+S\+E\+D} (void)
+\item 
+void \hyperlink{classMachine_aa9451bf11291573e776f72305b41646f}{set\+As\+No\+Sensor} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classMachine_a94a9f103d3bf3565dec774c1c7480803}{response}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classMachine}{Machine} class represents a machine to which the arduio and sensor is connected. Each laundry machine has one machine object. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classMachine_a80c3b107d589a615ff42f760a5d64b32}{}\index{Machine@{Machine}!Machine@{Machine}}
+\index{Machine@{Machine}!Machine@{Machine}}
+\subsubsection[{Machine(void)}]{\setlength{\rightskip}{0pt plus 5cm}Machine\+::\+Machine (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{classMachine_a80c3b107d589a615ff42f760a5d64b32}
+boolean that says whether the sensor responded or non Constructor, sets response to 0 (false) automatically 
+\begin{DoxyCode}
+4                      \{
+5   \hyperlink{classMachine_a94a9f103d3bf3565dec774c1c7480803}{response} = 0;
+6 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classMachine_a2fb11e330fa5e2b6a7134ee55ac7ef43}{}\index{Machine@{Machine}!get\+Current\+Time@{get\+Current\+Time}}
+\index{get\+Current\+Time@{get\+Current\+Time}!Machine@{Machine}}
+\subsubsection[{get\+Current\+Time()}]{\setlength{\rightskip}{0pt plus 5cm}double Machine\+::get\+Current\+Time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classMachine_a2fb11e330fa5e2b6a7134ee55ac7ef43}
+method to get the current time using standard library \begin{DoxyReturn}{Returns}
+returns clock time as a double 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+29                           \{
+30     \textcolor{keyword}{struct }timeval tv = \{0, 0\};
+31     \textcolor{keyword}{struct }timezone tz;
+32     gettimeofday(&tv, &tz);
+33     \textcolor{keywordflow}{return} tv.tv\_sec + tv.tv\_usec / (double)1000000.;
+34   \}
+\end{DoxyCode}
+\hypertarget{classMachine_ad0e9081e633c3f1dd8867e7d147a261d}{}\index{Machine@{Machine}!Is\+Responding@{Is\+Responding}}
+\index{Is\+Responding@{Is\+Responding}!Machine@{Machine}}
+\subsubsection[{Is\+Responding(void)}]{\setlength{\rightskip}{0pt plus 5cm}bool Machine\+::\+Is\+Responding (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{classMachine_ad0e9081e633c3f1dd8867e7d147a261d}
+tell whether sensor is responding or not \begin{DoxyReturn}{Returns}
+returns true or false to tell if sensor has responded(is conected properly) or not 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+32 \{ \textcolor{keywordflow}{return} \hyperlink{classMachine_a94a9f103d3bf3565dec774c1c7480803}{response}; \}
+\end{DoxyCode}
+\hypertarget{classMachine_aa9451bf11291573e776f72305b41646f}{}\index{Machine@{Machine}!set\+As\+No\+Sensor@{set\+As\+No\+Sensor}}
+\index{set\+As\+No\+Sensor@{set\+As\+No\+Sensor}!Machine@{Machine}}
+\subsubsection[{set\+As\+No\+Sensor(void)}]{\setlength{\rightskip}{0pt plus 5cm}void Machine\+::set\+As\+No\+Sensor (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{classMachine_aa9451bf11291573e776f72305b41646f}
+update the file with necessary error code if sensor isn\textquotesingle{}t found or is unresponsive 
+\begin{DoxyCode}
+24                                \{
+25     ofstream statusfile;
+26     statusfile.open(\textcolor{stringliteral}{"status.dat"});
+27     statusfile << \textcolor{stringliteral}{"NSFD"};
+28     statusfile.close();
+29     cout << \textcolor{stringliteral}{"NSFD stored. Restart the program after connecting sensor."} << endl;
+30 \}
+\end{DoxyCode}
+\hypertarget{classMachine_aa2691fd518ccf5bf91f641d168c6e67d}{}\index{Machine@{Machine}!set\+File\+As\+N\+O\+T\+U\+S\+E\+D@{set\+File\+As\+N\+O\+T\+U\+S\+E\+D}}
+\index{set\+File\+As\+N\+O\+T\+U\+S\+E\+D@{set\+File\+As\+N\+O\+T\+U\+S\+E\+D}!Machine@{Machine}}
+\subsubsection[{set\+File\+As\+N\+O\+T\+U\+S\+E\+D(void)}]{\setlength{\rightskip}{0pt plus 5cm}void Machine\+::set\+File\+As\+N\+O\+T\+U\+S\+E\+D (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{classMachine_aa2691fd518ccf5bf91f641d168c6e67d}
+change the status of machine in file as N\+O\+T U\+S\+E\+D 
+\begin{DoxyCode}
+17                                    \{
+18   ofstream statusfile;
+19   statusfile.open(\textcolor{stringliteral}{"status.dat"});
+20   statusfile << \textcolor{stringliteral}{"MACHINE NOT-IN USE"};
+21   statusfile.close();
+22 \}
+\end{DoxyCode}
+\hypertarget{classMachine_a2596d7951c310917a62a2be50ff62b5a}{}\index{Machine@{Machine}!set\+File\+As\+U\+S\+E@{set\+File\+As\+U\+S\+E}}
+\index{set\+File\+As\+U\+S\+E@{set\+File\+As\+U\+S\+E}!Machine@{Machine}}
+\subsubsection[{set\+File\+As\+U\+S\+E(int time)}]{\setlength{\rightskip}{0pt plus 5cm}void Machine\+::set\+File\+As\+U\+S\+E (
+\begin{DoxyParamCaption}
+\item[{int}]{time}
+\end{DoxyParamCaption}
+)}\label{classMachine_a2596d7951c310917a62a2be50ff62b5a}
+change the status of machine in file as U\+S\+E\+D and update timer 
+\begin{DoxyParams}{Parameters}
+{\em time} & minute in timer sent as integer \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+8                                    \{
+9   ofstream statusfile;
+10   statusfile.open(\textcolor{stringliteral}{"status.dat"});
+11   cout << \textcolor{stringliteral}{"IN USE-"} << time << \textcolor{stringliteral}{" minutes"} << endl;
+12   statusfile << \textcolor{stringliteral}{"IN USE-"} << time
+13              << \textcolor{stringliteral}{" minutes"}; \textcolor{comment}{// its about 1 minute when the vibration starts}
+14   statusfile.close();
+15 \}
+\end{DoxyCode}
+\hypertarget{classMachine_aae30fc95cd4f4089b79bcd680cf774eb}{}\index{Machine@{Machine}!set\+Response@{set\+Response}}
+\index{set\+Response@{set\+Response}!Machine@{Machine}}
+\subsubsection[{set\+Response(bool b)}]{\setlength{\rightskip}{0pt plus 5cm}void Machine\+::set\+Response (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)}\label{classMachine_aae30fc95cd4f4089b79bcd680cf774eb}
+set whether the sensor responded or not 
+\begin{DoxyParams}{Parameters}
+{\em b} & is a boolean, true if sensor responds (or is connected)properly, false if it doesn\textquotesingle{}t \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+34 \{ \hyperlink{classMachine_a94a9f103d3bf3565dec774c1c7480803}{response} = b; \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classMachine_a94a9f103d3bf3565dec774c1c7480803}{}\index{Machine@{Machine}!response@{response}}
+\index{response@{response}!Machine@{Machine}}
+\subsubsection[{response}]{\setlength{\rightskip}{0pt plus 5cm}bool Machine\+::response\hspace{0.3cm}{\ttfamily [private]}}\label{classMachine_a94a9f103d3bf3565dec774c1c7480803}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{PiClasses_8h}{Pi\+Classes.\+h}\item 
+\hyperlink{PiClasses_8cpp}{Pi\+Classes.\+cpp}\end{DoxyCompactItemize}

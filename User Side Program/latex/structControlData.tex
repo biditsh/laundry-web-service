@@ -1,0 +1,47 @@
+\hypertarget{structControlData}{}\section{Control\+Data Struct Reference}
+\label{structControlData}\index{Control\+Data@{Control\+Data}}
+
+
+{\ttfamily \#include $<$Worker.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structControlData_a575219e5e0bc27904dc2aa7b1315d356}{Control\+Data} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+atomic$<$ int $>$ \hyperlink{structControlData_ac8fbf80345423cf5650ae64bfb10dc88}{contin}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+data structure for managing control of the server 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structControlData_a575219e5e0bc27904dc2aa7b1315d356}{}\index{Control\+Data@{Control\+Data}!Control\+Data@{Control\+Data}}
+\index{Control\+Data@{Control\+Data}!Control\+Data@{Control\+Data}}
+\subsubsection[{Control\+Data()}]{\setlength{\rightskip}{0pt plus 5cm}Control\+Data\+::\+Control\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structControlData_a575219e5e0bc27904dc2aa7b1315d356}
+default constructor \begin{DoxyParagraph}{State Changes}
+assign 1 to contin 
+\end{DoxyParagraph}
+
+\begin{DoxyCode}
+19 \{ \hyperlink{structControlData_ac8fbf80345423cf5650ae64bfb10dc88}{contin} = 1; \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structControlData_ac8fbf80345423cf5650ae64bfb10dc88}{}\index{Control\+Data@{Control\+Data}!contin@{contin}}
+\index{contin@{contin}!Control\+Data@{Control\+Data}}
+\subsubsection[{contin}]{\setlength{\rightskip}{0pt plus 5cm}atomic$<$int$>$ Control\+Data\+::contin}\label{structControlData_ac8fbf80345423cf5650ae64bfb10dc88}
+continue serving while contin is non-\/zero. The type atomic$<$int$>$ prevents \char`\"{}race condition\char`\"{} errors if multiple threads try to access contin at the same time 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Worker_8h}{Worker.\+h}\end{DoxyCompactItemize}

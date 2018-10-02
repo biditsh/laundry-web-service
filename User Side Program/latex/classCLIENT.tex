@@ -1,0 +1,222 @@
+\hypertarget{classCLIENT}{}\section{C\+L\+I\+E\+N\+T Class Reference}
+\label{classCLIENT}\index{C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}}
+
+
+{\ttfamily \#include $<$C\+L\+I\+E\+N\+T.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCLIENT_a75ee0d6f5c06f2fe955ce3521ae7c006}{C\+L\+I\+E\+N\+T} (string host, int port, string machine\+I\+D)
+\item 
+string \hyperlink{classCLIENT_a7dae67de8282043e85a51a6fce71d304}{return\+Machine\+Status} ()
+\item 
+string \hyperlink{classCLIENT_a4ca44e781e85e795af54eca1adc7432a}{return\+Machine\+Timer} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ string $>$ \hyperlink{classCLIENT_a007cf416382fd529a3456f9c5db5771f}{split} (string str, char sep)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{classCLIENT_a83578b8ade6203c7a78972b3393e923b}{machine\+Status}
+\item 
+string \hyperlink{classCLIENT_a0474dbf26b3f3a99bf7579278453ef79}{machine\+Timer}
+\item 
+string \hyperlink{classCLIENT_a750c6b410d6358c35e415031dfd350c8}{connection\+Status}
+\item 
+bool \hyperlink{classCLIENT_af7973e9a611e41850653f69b9e9e3e8f}{cs}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classCLIENT_a75ee0d6f5c06f2fe955ce3521ae7c006}{}\index{C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}!C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}}
+\index{C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}!C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}}
+\subsubsection[{C\+L\+I\+E\+N\+T(string host, int port, string machine\+I\+D)}]{\setlength{\rightskip}{0pt plus 5cm}C\+L\+I\+E\+N\+T\+::\+C\+L\+I\+E\+N\+T (
+\begin{DoxyParamCaption}
+\item[{string}]{host, }
+\item[{int}]{port, }
+\item[{string}]{machine\+I\+D}
+\end{DoxyParamCaption}
+)}\label{classCLIENT_a75ee0d6f5c06f2fe955ce3521ae7c006}
+
+\begin{DoxyCode}
+15                                                       \{
+16   \hyperlink{classSocket}{Socket} sock(host.c\_str(), port);
+17   \textcolor{keywordtype}{int} ret;
+18 
+19   \textcolor{keywordflow}{if} (sock.getConnected())\{
+20     \hyperlink{classCLIENT_a750c6b410d6358c35e415031dfd350c8}{connectionStatus} = \textcolor{stringliteral}{"Conection was sucessful"};
+21     \hyperlink{classCLIENT_af7973e9a611e41850653f69b9e9e3e8f}{cs} = \textcolor{keyword}{true};
+22   \}
+23   \textcolor{keywordflow}{else} \{
+24     \hyperlink{classCLIENT_a750c6b410d6358c35e415031dfd350c8}{connectionStatus} = \textcolor{stringliteral}{"Could not connect, check your internet: socket not connected"};
+25     \hyperlink{classCLIENT_a83578b8ade6203c7a78972b3393e923b}{machineStatus} = \textcolor{stringliteral}{"Connection"};
+26     \hyperlink{classCLIENT_a0474dbf26b3f3a99bf7579278453ef79}{machineTimer} = \textcolor{stringliteral}{"Failed"};
+27     \hyperlink{classCLIENT_af7973e9a611e41850653f69b9e9e3e8f}{cs} = \textcolor{keyword}{false};
+28   \}
+29 
+30   \textcolor{keywordtype}{char} buff[100];
+31 
+32   \textcolor{keywordflow}{if} ((ret = sock.recv(buff, 100-1)) < 0) \{
+33     \hyperlink{classCLIENT_a750c6b410d6358c35e415031dfd350c8}{connectionStatus} = \textcolor{stringliteral}{"Could not connect, check your internet: bad return value"};
+34     \hyperlink{classCLIENT_a83578b8ade6203c7a78972b3393e923b}{machineStatus} = \textcolor{stringliteral}{"Connection"};
+35     \hyperlink{classCLIENT_a0474dbf26b3f3a99bf7579278453ef79}{machineTimer} = \textcolor{stringliteral}{"Failed"};
+36     cout << ret << endl;
+37     \hyperlink{classCLIENT_af7973e9a611e41850653f69b9e9e3e8f}{cs} = \textcolor{keyword}{false};
+38   \}
+39 
+40 
+41 \textcolor{keywordflow}{if} (strcmp(buff, \textcolor{stringliteral}{"SVBG"}) == 0)\{      \textcolor{comment}{//happens when MAXWORKER is reached}
+42         \hyperlink{classCLIENT_a83578b8ade6203c7a78972b3393e923b}{machineStatus}=\textcolor{stringliteral}{"Server"};
+43         \hyperlink{classCLIENT_a0474dbf26b3f3a99bf7579278453ef79}{machineTimer}=\textcolor{stringliteral}{"Busy"};
+44         \hyperlink{classCLIENT_af7973e9a611e41850653f69b9e9e3e8f}{cs}=\textcolor{keyword}{false};
+45       \}
+46   cout << \hyperlink{classCLIENT_a750c6b410d6358c35e415031dfd350c8}{connectionStatus} << endl;
+47   \textcolor{comment}{// assert:  welcome message received and connection to server completed}
+48 
+49   \textcolor{keywordflow}{while} (\hyperlink{classCLIENT_af7973e9a611e41850653f69b9e9e3e8f}{cs}) \{
+50     sock.send(machineID.c\_str(), machineID.size());
+51     ret = sock.recv(buff, 100-1);
+52     buff[ret] = \textcolor{charliteral}{'\(\backslash\)0'};  \textcolor{comment}{// add terminating nullbyte to received array of char}
+53     cout<<ret;
+54     \textcolor{keywordtype}{string} information = buff;
+55     cout << buff << endl;
+56     vector<string> parts = \hyperlink{classCLIENT_a007cf416382fd529a3456f9c5db5771f}{split}(information, \textcolor{charliteral}{'-'});
+57 
+58 
+59     \textcolor{keywordflow}{if}(ret == 0)\{
+60         \hyperlink{classCLIENT_a83578b8ade6203c7a78972b3393e923b}{machineStatus} = \textcolor{stringliteral}{"Data not"};
+61         \hyperlink{classCLIENT_a0474dbf26b3f3a99bf7579278453ef79}{machineTimer} = \textcolor{stringliteral}{"received"};
+62     \}
+63 
+64     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (strcmp(buff, \textcolor{stringliteral}{"EPIC"}) == 0)\{   \textcolor{comment}{//happens when status.dat isn't found}
+65       \hyperlink{classCLIENT_a83578b8ade6203c7a78972b3393e923b}{machineStatus}=\textcolor{stringliteral}{"Pi Configuration"};
+66       \hyperlink{classCLIENT_a0474dbf26b3f3a99bf7579278453ef79}{machineTimer}=\textcolor{stringliteral}{"Error"};
+67     \}
+68 
+69  \textcolor{comment}{/*   else if (strcmp(buff, "SVBG") == 0)\{      //happens when MAXWORKER is reached}
+70 \textcolor{comment}{      machineStatus="Server";}
+71 \textcolor{comment}{      machineTimer="Busy";}
+72 \textcolor{comment}{      sock.close();}
+73 \textcolor{comment}{      break;}
+74 \textcolor{comment}{    \}*/}
+75 
+76     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (strcmp(buff, \textcolor{stringliteral}{"NSFD"}) == 0)\{      \textcolor{comment}{//happens when dev/ttyACMx isn't found by Pi}
+77 
+78       \hyperlink{classCLIENT_a83578b8ade6203c7a78972b3393e923b}{machineStatus}=\textcolor{stringliteral}{"Sensor"};
+79       \hyperlink{classCLIENT_a0474dbf26b3f3a99bf7579278453ef79}{machineTimer}=\textcolor{stringliteral}{"Not Found"};
+80     \}
+81 
+82     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (strcmp(buff, \textcolor{stringliteral}{"WRCD"}) == 0)\{          \textcolor{comment}{//happend when wrong machine Id is sent to Pi}
+83       \hyperlink{classCLIENT_a83578b8ade6203c7a78972b3393e923b}{machineStatus}=\textcolor{stringliteral}{"Configuration"};
+84       \hyperlink{classCLIENT_a0474dbf26b3f3a99bf7579278453ef79}{machineTimer}=\textcolor{stringliteral}{"Error"};
+85     \}
+86 
+87     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (information == \textcolor{stringliteral}{"DONE"}) \{
+88         sock.send(\textcolor{stringliteral}{"END"}, 3);
+89         sock.close();
+90         \textcolor{keywordflow}{break};
+91       \}
+92 
+93 
+94      \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (parts.size() != 2) \{
+95           cerr << \textcolor{stringliteral}{"invalid data"} << endl;
+96           cerr << \textcolor{stringliteral}{"recieved string: "} << information << endl;
+97           \hyperlink{classCLIENT_a83578b8ade6203c7a78972b3393e923b}{machineStatus}=\textcolor{stringliteral}{"Invalid"};
+98           \hyperlink{classCLIENT_a0474dbf26b3f3a99bf7579278453ef79}{machineTimer}= \textcolor{stringliteral}{"Response"};
+99     \}
+100 
+101 
+102     \textcolor{keywordflow}{else}\{
+103          \hyperlink{classCLIENT_a83578b8ade6203c7a78972b3393e923b}{machineStatus} = parts.at(0);
+104          \hyperlink{classCLIENT_a0474dbf26b3f3a99bf7579278453ef79}{machineTimer} = parts.at(1);
+105     \}
+106 
+107 
+108     sock.send(\textcolor{stringliteral}{"DONE"}, 4);
+109 
+110     \textcolor{keywordflow}{if} (information == \textcolor{stringliteral}{"DONE"}) \{
+111       sock.send(\textcolor{stringliteral}{"END"}, 3);
+112       sock.close();
+113       \textcolor{keywordflow}{break};
+114     \}
+115   \}
+116 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classCLIENT_a7dae67de8282043e85a51a6fce71d304}{}\index{C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}!return\+Machine\+Status@{return\+Machine\+Status}}
+\index{return\+Machine\+Status@{return\+Machine\+Status}!C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}}
+\subsubsection[{return\+Machine\+Status()}]{\setlength{\rightskip}{0pt plus 5cm}string C\+L\+I\+E\+N\+T\+::return\+Machine\+Status (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classCLIENT_a7dae67de8282043e85a51a6fce71d304}
+
+\begin{DoxyCode}
+131                                   \{
+132   \textcolor{keywordflow}{return} \hyperlink{classCLIENT_a83578b8ade6203c7a78972b3393e923b}{machineStatus};
+133 \}
+\end{DoxyCode}
+\hypertarget{classCLIENT_a4ca44e781e85e795af54eca1adc7432a}{}\index{C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}!return\+Machine\+Timer@{return\+Machine\+Timer}}
+\index{return\+Machine\+Timer@{return\+Machine\+Timer}!C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}}
+\subsubsection[{return\+Machine\+Timer()}]{\setlength{\rightskip}{0pt plus 5cm}string C\+L\+I\+E\+N\+T\+::return\+Machine\+Timer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classCLIENT_a4ca44e781e85e795af54eca1adc7432a}
+
+\begin{DoxyCode}
+135                                  \{
+136   \textcolor{keywordflow}{return} \hyperlink{classCLIENT_a0474dbf26b3f3a99bf7579278453ef79}{machineTimer};
+137 \}
+\end{DoxyCode}
+\hypertarget{classCLIENT_a007cf416382fd529a3456f9c5db5771f}{}\index{C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}!split@{split}}
+\index{split@{split}!C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}}
+\subsubsection[{split(string str, char sep)}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ string $>$ C\+L\+I\+E\+N\+T\+::split (
+\begin{DoxyParamCaption}
+\item[{string}]{str, }
+\item[{char}]{sep}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{classCLIENT_a007cf416382fd529a3456f9c5db5771f}
+
+\begin{DoxyCode}
+118                                                  \{
+119   stringstream test(str);
+120   \textcolor{keywordtype}{string} segment;
+121   vector<string> seglist;
+122 
+123   \textcolor{keywordflow}{while}(getline(test, segment, sep)) \{
+124    seglist.push\_back(segment);
+125   \}
+126 
+127   \textcolor{keywordflow}{return} seglist;
+128 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classCLIENT_a750c6b410d6358c35e415031dfd350c8}{}\index{C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}!connection\+Status@{connection\+Status}}
+\index{connection\+Status@{connection\+Status}!C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}}
+\subsubsection[{connection\+Status}]{\setlength{\rightskip}{0pt plus 5cm}string C\+L\+I\+E\+N\+T\+::connection\+Status\hspace{0.3cm}{\ttfamily [private]}}\label{classCLIENT_a750c6b410d6358c35e415031dfd350c8}
+\hypertarget{classCLIENT_af7973e9a611e41850653f69b9e9e3e8f}{}\index{C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}!cs@{cs}}
+\index{cs@{cs}!C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}}
+\subsubsection[{cs}]{\setlength{\rightskip}{0pt plus 5cm}bool C\+L\+I\+E\+N\+T\+::cs\hspace{0.3cm}{\ttfamily [private]}}\label{classCLIENT_af7973e9a611e41850653f69b9e9e3e8f}
+\hypertarget{classCLIENT_a83578b8ade6203c7a78972b3393e923b}{}\index{C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}!machine\+Status@{machine\+Status}}
+\index{machine\+Status@{machine\+Status}!C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}}
+\subsubsection[{machine\+Status}]{\setlength{\rightskip}{0pt plus 5cm}string C\+L\+I\+E\+N\+T\+::machine\+Status\hspace{0.3cm}{\ttfamily [private]}}\label{classCLIENT_a83578b8ade6203c7a78972b3393e923b}
+\hypertarget{classCLIENT_a0474dbf26b3f3a99bf7579278453ef79}{}\index{C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}!machine\+Timer@{machine\+Timer}}
+\index{machine\+Timer@{machine\+Timer}!C\+L\+I\+E\+N\+T@{C\+L\+I\+E\+N\+T}}
+\subsubsection[{machine\+Timer}]{\setlength{\rightskip}{0pt plus 5cm}string C\+L\+I\+E\+N\+T\+::machine\+Timer\hspace{0.3cm}{\ttfamily [private]}}\label{classCLIENT_a0474dbf26b3f3a99bf7579278453ef79}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{CLIENT_8h}{C\+L\+I\+E\+N\+T.\+h}\item 
+\hyperlink{CLIENT_8cpp}{C\+L\+I\+E\+N\+T.\+cpp}\item 
+\hyperlink{CLIENT1_8cpp}{C\+L\+I\+E\+N\+T1.\+cpp}\item 
+\hyperlink{CLIENT2_8cpp}{C\+L\+I\+E\+N\+T2.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,169 @@
+\hypertarget{classUser}{}\section{User Class Reference}
+\label{classUser}\index{User@{User}}
+
+
+{\ttfamily \#include $<$user.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classUser_a9a728dad6620c050f615b73f7bca5cb1}{User} (void)
+\item 
+void \hyperlink{classUser_a403db79f8c867abdf97b439d4dae11d0}{set\+User\+Dorm} (const char $\ast$Dorm\+Id)
+\item 
+void \hyperlink{classUser_aad56ed72b7df97e4502f45d4ac667126}{set\+User\+Floor} (int Floor\+Id)
+\item 
+void \hyperlink{classUser_a8462db103584dd74534bc663ff5f2097}{set\+User\+Machine} (int Machine\+Id\+No)
+\item 
+void \hyperlink{classUser_afb5acdb16bedc32ed78ae316d45af04e}{set\+User\+Machine\+Type} (const char Machine\+Type)
+\item 
+char $\ast$ \hyperlink{classUser_a74d5df47df160b5ae9c1dd1e3f338298}{get\+User\+Machine\+Id} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{classUser_a6d5b4a38c0a16c7944f725df302931b1}{makecopy} (const char $\ast$ch)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{classUser_ae0517de4807d5f9a449e8a4c4341f4c9}{user\+Dorm}
+\item 
+int \hyperlink{classUser_a0c86cd357c87600cf0f6ebbc066785c2}{user\+Floor}
+\item 
+int \hyperlink{classUser_aea80da016298be436439c1998c603f8d}{user\+Machine}
+\item 
+char \hyperlink{classUser_af019bb7663447d96e7c4f8b8920b8eb1}{user\+Machine\+Type}
+\item 
+char $\ast$ \hyperlink{classUser_a38faf399c2812eb80dafc6975843ae08}{user\+Machine\+Id}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classUser_a9a728dad6620c050f615b73f7bca5cb1}{}\index{User@{User}!User@{User}}
+\index{User@{User}!User@{User}}
+\subsubsection[{User(void)}]{\setlength{\rightskip}{0pt plus 5cm}User\+::\+User (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{classUser_a9a728dad6620c050f615b73f7bca5cb1}
+
+\begin{DoxyCode}
+3               \{
+4         \hyperlink{classUser_ae0517de4807d5f9a449e8a4c4341f4c9}{userDorm}=\textcolor{keyword}{nullptr};
+5         \hyperlink{classUser_a0c86cd357c87600cf0f6ebbc066785c2}{userFloor}=0;
+6         \hyperlink{classUser_aea80da016298be436439c1998c603f8d}{userMachine}=0;
+7         \hyperlink{classUser_af019bb7663447d96e7c4f8b8920b8eb1}{userMachineType}=0;
+8         \hyperlink{classUser_a38faf399c2812eb80dafc6975843ae08}{userMachineId}=\textcolor{keyword}{nullptr};
+9 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classUser_a74d5df47df160b5ae9c1dd1e3f338298}{}\index{User@{User}!get\+User\+Machine\+Id@{get\+User\+Machine\+Id}}
+\index{get\+User\+Machine\+Id@{get\+User\+Machine\+Id}!User@{User}}
+\subsubsection[{get\+User\+Machine\+Id(void)}]{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ User\+::get\+User\+Machine\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{classUser_a74d5df47df160b5ae9c1dd1e3f338298}
+
+\begin{DoxyCode}
+27                                 \{
+28     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"ell-test-test-test"};
+29 \}\end{DoxyCode}
+\hypertarget{classUser_a6d5b4a38c0a16c7944f725df302931b1}{}\index{User@{User}!makecopy@{makecopy}}
+\index{makecopy@{makecopy}!User@{User}}
+\subsubsection[{makecopy(const char $\ast$ch)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ User\+::makecopy (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{ch}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{classUser_a6d5b4a38c0a16c7944f725df302931b1}
+
+\begin{DoxyCode}
+20                                     \{        \textcolor{comment}{//the makecopy fuction to create copied of c style strings}
+21     \textcolor{keywordtype}{char} * newchar;
+22     \textcolor{keywordtype}{int} i=0;
+23     \textcolor{keywordflow}{for} (i=0; ch[i]!=\textcolor{charliteral}{'\(\backslash\)0'}; i++);
+24     newchar= \textcolor{keyword}{new} \textcolor{keywordtype}{char} [i+1];
+25     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<i+1; j++)
+26         newchar[j]=ch[j];
+27     \textcolor{keywordflow}{return} newchar;
+28     \}
+\end{DoxyCode}
+\hypertarget{classUser_a403db79f8c867abdf97b439d4dae11d0}{}\index{User@{User}!set\+User\+Dorm@{set\+User\+Dorm}}
+\index{set\+User\+Dorm@{set\+User\+Dorm}!User@{User}}
+\subsubsection[{set\+User\+Dorm(const char $\ast$\+Dorm\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}void User\+::set\+User\+Dorm (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{Dorm\+Id}
+\end{DoxyParamCaption}
+)}\label{classUser_a403db79f8c867abdf97b439d4dae11d0}
+
+\begin{DoxyCode}
+11                                          \{
+12     \hyperlink{classUser_ae0517de4807d5f9a449e8a4c4341f4c9}{userDorm}= \hyperlink{classUser_a6d5b4a38c0a16c7944f725df302931b1}{makecopy}(DormId);
+13 \}
+\end{DoxyCode}
+\hypertarget{classUser_aad56ed72b7df97e4502f45d4ac667126}{}\index{User@{User}!set\+User\+Floor@{set\+User\+Floor}}
+\index{set\+User\+Floor@{set\+User\+Floor}!User@{User}}
+\subsubsection[{set\+User\+Floor(int Floor\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}void User\+::set\+User\+Floor (
+\begin{DoxyParamCaption}
+\item[{int}]{Floor\+Id}
+\end{DoxyParamCaption}
+)}\label{classUser_aad56ed72b7df97e4502f45d4ac667126}
+
+\begin{DoxyCode}
+15                                   \{
+16     \hyperlink{classUser_a0c86cd357c87600cf0f6ebbc066785c2}{userFloor}= FloorId;
+17 \}
+\end{DoxyCode}
+\hypertarget{classUser_a8462db103584dd74534bc663ff5f2097}{}\index{User@{User}!set\+User\+Machine@{set\+User\+Machine}}
+\index{set\+User\+Machine@{set\+User\+Machine}!User@{User}}
+\subsubsection[{set\+User\+Machine(int Machine\+Id\+No)}]{\setlength{\rightskip}{0pt plus 5cm}void User\+::set\+User\+Machine (
+\begin{DoxyParamCaption}
+\item[{int}]{Machine\+Id\+No}
+\end{DoxyParamCaption}
+)}\label{classUser_a8462db103584dd74534bc663ff5f2097}
+
+\begin{DoxyCode}
+19                                         \{
+20     \hyperlink{classUser_aea80da016298be436439c1998c603f8d}{userMachine}=MachineIdNo;
+21 \}
+\end{DoxyCode}
+\hypertarget{classUser_afb5acdb16bedc32ed78ae316d45af04e}{}\index{User@{User}!set\+User\+Machine\+Type@{set\+User\+Machine\+Type}}
+\index{set\+User\+Machine\+Type@{set\+User\+Machine\+Type}!User@{User}}
+\subsubsection[{set\+User\+Machine\+Type(const char Machine\+Type)}]{\setlength{\rightskip}{0pt plus 5cm}void User\+::set\+User\+Machine\+Type (
+\begin{DoxyParamCaption}
+\item[{const char}]{Machine\+Type}
+\end{DoxyParamCaption}
+)}\label{classUser_afb5acdb16bedc32ed78ae316d45af04e}
+
+\begin{DoxyCode}
+23                                                    \{
+24     \hyperlink{classUser_af019bb7663447d96e7c4f8b8920b8eb1}{userMachineType}=MachineType;
+25 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classUser_ae0517de4807d5f9a449e8a4c4341f4c9}{}\index{User@{User}!user\+Dorm@{user\+Dorm}}
+\index{user\+Dorm@{user\+Dorm}!User@{User}}
+\subsubsection[{user\+Dorm}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ User\+::user\+Dorm\hspace{0.3cm}{\ttfamily [private]}}\label{classUser_ae0517de4807d5f9a449e8a4c4341f4c9}
+\hypertarget{classUser_a0c86cd357c87600cf0f6ebbc066785c2}{}\index{User@{User}!user\+Floor@{user\+Floor}}
+\index{user\+Floor@{user\+Floor}!User@{User}}
+\subsubsection[{user\+Floor}]{\setlength{\rightskip}{0pt plus 5cm}int User\+::user\+Floor\hspace{0.3cm}{\ttfamily [private]}}\label{classUser_a0c86cd357c87600cf0f6ebbc066785c2}
+\hypertarget{classUser_aea80da016298be436439c1998c603f8d}{}\index{User@{User}!user\+Machine@{user\+Machine}}
+\index{user\+Machine@{user\+Machine}!User@{User}}
+\subsubsection[{user\+Machine}]{\setlength{\rightskip}{0pt plus 5cm}int User\+::user\+Machine\hspace{0.3cm}{\ttfamily [private]}}\label{classUser_aea80da016298be436439c1998c603f8d}
+\hypertarget{classUser_a38faf399c2812eb80dafc6975843ae08}{}\index{User@{User}!user\+Machine\+Id@{user\+Machine\+Id}}
+\index{user\+Machine\+Id@{user\+Machine\+Id}!User@{User}}
+\subsubsection[{user\+Machine\+Id}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ User\+::user\+Machine\+Id\hspace{0.3cm}{\ttfamily [private]}}\label{classUser_a38faf399c2812eb80dafc6975843ae08}
+\hypertarget{classUser_af019bb7663447d96e7c4f8b8920b8eb1}{}\index{User@{User}!user\+Machine\+Type@{user\+Machine\+Type}}
+\index{user\+Machine\+Type@{user\+Machine\+Type}!User@{User}}
+\subsubsection[{user\+Machine\+Type}]{\setlength{\rightskip}{0pt plus 5cm}char User\+::user\+Machine\+Type\hspace{0.3cm}{\ttfamily [private]}}\label{classUser_af019bb7663447d96e7c4f8b8920b8eb1}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{user_8h}{user.\+h}\item 
+\hyperlink{user_8cpp}{user.\+cpp}\end{DoxyCompactItemize}

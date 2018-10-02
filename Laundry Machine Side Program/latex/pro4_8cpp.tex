@@ -1,0 +1,232 @@
+\hypertarget{pro4_8cpp}{}\section{pro4.\+cpp File Reference}
+\label{pro4_8cpp}\index{pro4.\+cpp@{pro4.\+cpp}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$cstring$>$}\\*
+{\ttfamily \#include $<$thread$>$}\\*
+{\ttfamily \#include $<$sys/time.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}Pi\+Classes.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Worker.\+h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{pro4_8cpp_a150aa807a94411b028b908cde770e0fe}{M\+A\+X\+W\+O\+R\+K\+E\+R\+S}~10
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{pro4_8cpp_a54a4c7d17db93a6dda7546a073e61b72}{do\+Control} (\hyperlink{structControlData}{Control\+Data} $\ast$cdp, int port)
+\item 
+void \hyperlink{pro4_8cpp_a91f84e64446f72dddee9e3eed8f44c01}{Sensor\+Program} (void)
+\item 
+int \hyperlink{pro4_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{pro4_8cpp_a150aa807a94411b028b908cde770e0fe}{}\index{pro4.\+cpp@{pro4.\+cpp}!M\+A\+X\+W\+O\+R\+K\+E\+R\+S@{M\+A\+X\+W\+O\+R\+K\+E\+R\+S}}
+\index{M\+A\+X\+W\+O\+R\+K\+E\+R\+S@{M\+A\+X\+W\+O\+R\+K\+E\+R\+S}!pro4.\+cpp@{pro4.\+cpp}}
+\subsubsection[{M\+A\+X\+W\+O\+R\+K\+E\+R\+S}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+W\+O\+R\+K\+E\+R\+S~10}\label{pro4_8cpp_a150aa807a94411b028b908cde770e0fe}
+
+
+\subsection{Function Documentation}
+\hypertarget{pro4_8cpp_a54a4c7d17db93a6dda7546a073e61b72}{}\index{pro4.\+cpp@{pro4.\+cpp}!do\+Control@{do\+Control}}
+\index{do\+Control@{do\+Control}!pro4.\+cpp@{pro4.\+cpp}}
+\subsubsection[{do\+Control(\+Control\+Data $\ast$cdp, int port)}]{\setlength{\rightskip}{0pt plus 5cm}void do\+Control (
+\begin{DoxyParamCaption}
+\item[{{\bf Control\+Data} $\ast$}]{cdp, }
+\item[{int}]{port}
+\end{DoxyParamCaption}
+)}\label{pro4_8cpp_a54a4c7d17db93a6dda7546a073e61b72}
+code for control thread 
+\begin{DoxyParams}{Parameters}
+{\em cdp} & points to smakhared data structure for controlling server \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+21                                            \{
+22   \textcolor{keyword}{const} \textcolor{keywordtype}{int} maxbuff = 100;
+23   \textcolor{keywordtype}{char} buff[maxbuff];
+24   \textcolor{keywordflow}{while} (cin.getline(buff, maxbuff - 1)) \{
+25     \textcolor{keywordflow}{if} (strcmp(buff, \textcolor{stringliteral}{"EXIT"}) == 0)
+26       \textcolor{keywordflow}{break};
+27     \textcolor{keywordflow}{else}
+28       cerr << \textcolor{stringliteral}{"[control thread] unrecognized command: "} << buff << endl;
+29   \}
+30 
+31   \textcolor{comment}{// assert:  buff == "EXIT"}
+32   cout << \textcolor{stringliteral}{"[control thread] EXIT encountered"} << endl;
+33   cdp->\hyperlink{structControlData_ac8fbf80345423cf5650ae64bfb10dc88}{contin} = 0;
+34 
+35   \textcolor{comment}{// initialize as a Client, to unblock [main] accept()}
+36   \hyperlink{classSocket}{Socket} sock(\textcolor{stringliteral}{"localhost"}, port);
+37   sock.recv(buff, maxbuff - 1); \textcolor{comment}{// welcome message}
+38 
+39   \textcolor{comment}{//}
+40   sock.send(\textcolor{stringliteral}{"DONE"}, 4);
+41 \}
+\end{DoxyCode}
+\hypertarget{pro4_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{}\index{pro4.\+cpp@{pro4.\+cpp}!main@{main}}
+\index{main@{main}!pro4.\+cpp@{pro4.\+cpp}}
+\subsubsection[{main()}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{pro4_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}
+
+\begin{DoxyCode}
+95           \{             \textcolor{comment}{//main program}
+96 
+97   ifstream idStream;                \textcolor{comment}{//open the idfile to get macine Id and port number for connection}
+98   \textcolor{keywordtype}{int} port;
+99   \textcolor{keywordtype}{char} MachineId[13];
+100   idStream.open(\textcolor{stringliteral}{"idfile.dat"});
+101   \textcolor{keywordflow}{if} (idStream.good())\{
+102       idStream>>MachineId;
+103       cout<<\textcolor{stringliteral}{"Machine Id:"}<<MachineId<<endl;
+104       idStream>>port;
+105       idStream.close();
+106   \}
+107   \textcolor{keywordflow}{else}\{
+108       cout<<\textcolor{stringliteral}{"idfile.dat not found"}<<endl;
+109       \textcolor{keywordflow}{return} 1;
+110   \}
+111   \textcolor{comment}{//cout<<"Connection to socket "<<port<<endl;}
+112 
+113   \hyperlink{classServerSocket}{ServerSocket} ssock(port);
+114   \textcolor{keywordflow}{if} (ssock.getBound())
+115     cout << \textcolor{stringliteral}{"[main] port "} << port << \textcolor{stringliteral}{" bound to server socket"} << endl;
+116   \textcolor{keywordflow}{else} \{
+117     cout << \textcolor{stringliteral}{"[main] could not bind port "} << port
+118          << \textcolor{stringliteral}{" to server socket, aborting"} << endl;
+119     \textcolor{keywordflow}{return} 1;
+120   \}
+121   \textcolor{comment}{// server socket ssock is now set up}
+122 
+123   \textcolor{comment}{/* Define shared data structure for controlling server */}
+124   \hyperlink{structControlData}{ControlData} controlData;
+125 
+126   \textcolor{comment}{/* Create a thread for handling control input */}
+127   thread controlThread(\hyperlink{pro4_8cpp_a54a4c7d17db93a6dda7546a073e61b72}{doControl}, &controlData, port);
+128   thread Thread2(\hyperlink{pro4_8cpp_a91f84e64446f72dddee9e3eed8f44c01}{SensorProgram});
+129 
+130   \textcolor{comment}{/* main loop: */}
+131   \hyperlink{classSocket}{Socket} *csockp; \textcolor{comment}{// to hold new client socket}
+132   \hyperlink{classWorker}{Worker} *workers[\hyperlink{pro4_8cpp_a150aa807a94411b028b908cde770e0fe}{MAXWORKERS}];
+133   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{pro4_8cpp_a150aa807a94411b028b908cde770e0fe}{MAXWORKERS}; i++)
+134     workers[i] = 0;
+135   \textcolor{keywordtype}{int} workerCount = 0;
+136   \textcolor{keywordflow}{while} (controlData.\hyperlink{structControlData_ac8fbf80345423cf5650ae64bfb10dc88}{contin}) \{
+137     csockp = ssock.accept();
+138 
+139     \textcolor{keywordtype}{int} indx = 0; \textcolor{comment}{// loop control for finding unused element in workers[]}
+140     \textcolor{keywordflow}{while} (indx < MAXWORKERS) \{
+141       \textcolor{keywordflow}{if} (workers[indx] != 0 &&
+142           workers[indx]->getState() == \hyperlink{Worker_8h_ab3804a8a4369184ad46dadf8e54957b6a9c954bcf443428c80b0f107b3bc48749}{ThreadState::DONE}) \{
+143         cout << \textcolor{stringliteral}{"[main] joining on ["} << workers[indx]->\hyperlink{classWorker_ac4629e67476bbb1daab8ed28545b8421}{getId}() << \textcolor{stringliteral}{"]"} << endl;
+144         workers[indx]->join();
+145         cout << \textcolor{stringliteral}{"[main] join on ["} << workers[indx]->\hyperlink{classWorker_ac4629e67476bbb1daab8ed28545b8421}{getId}() << \textcolor{stringliteral}{"] accomplished"}
+146              << endl;
+147         \textcolor{keyword}{delete} workers[indx];
+148         workers[indx] = 0;
+149       \}
+150       \textcolor{keywordflow}{if} (workers[indx] == 0)
+151         \textcolor{keywordflow}{break};
+152       indx++;
+153     \}
+154     \textcolor{keywordflow}{if} (indx == MAXWORKERS) \{
+155       cout << \textcolor{stringliteral}{"[main] workers[] overfull, rejecting a new client"} << endl;
+156       csockp->\hyperlink{classSocket_aca3e5b9c5459a50bd8fb03d29ef9e48e}{send}(\textcolor{stringliteral}{"SVBG"}, 4); \textcolor{comment}{// server is busy, send error code back to client}
+157       cout << \textcolor{stringliteral}{"SVBG sent"} << endl;
+158       \textcolor{keywordflow}{continue};
+159     \}
+160 
+161     workers[indx] =
+162         \textcolor{keyword}{new} \hyperlink{classWorker}{Worker}(workerCount++, csockp, &controlData, MachineId);      \textcolor{comment}{//creating a new worker
+       class (thread) after a connection request is recieved}
+163   \}
+164 
+165   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{pro4_8cpp_a150aa807a94411b028b908cde770e0fe}{MAXWORKERS}; i++)
+166     \textcolor{keywordflow}{if} (workers[i]) \{
+167       cout << \textcolor{stringliteral}{"[main] joining on ["} << workers[i]->\hyperlink{classWorker_ac4629e67476bbb1daab8ed28545b8421}{getId}() << \textcolor{stringliteral}{"]"} << endl;
+168       workers[i]->join();
+169       cout << \textcolor{stringliteral}{"[main] join on ["} << workers[i]->\hyperlink{classWorker_ac4629e67476bbb1daab8ed28545b8421}{getId}() << \textcolor{stringliteral}{"] accomplished"}
+170            << endl;
+171       \textcolor{keyword}{delete} workers[i];
+172       workers[i] = 0;
+173     \}
+174 
+175   controlThread.join();
+176   Thread2.join();
+177   cout << \textcolor{stringliteral}{"[main] control thread join accomplished"} << endl;
+178 
+179   \textcolor{keywordflow}{return} 0;
+180 \}
+\end{DoxyCode}
+\hypertarget{pro4_8cpp_a91f84e64446f72dddee9e3eed8f44c01}{}\index{pro4.\+cpp@{pro4.\+cpp}!Sensor\+Program@{Sensor\+Program}}
+\index{Sensor\+Program@{Sensor\+Program}!pro4.\+cpp@{pro4.\+cpp}}
+\subsubsection[{Sensor\+Program(void)}]{\setlength{\rightskip}{0pt plus 5cm}void Sensor\+Program (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{pro4_8cpp_a91f84e64446f72dddee9e3eed8f44c01}
+code for thread tht deals with getting sensor data from serial port, analyzing it, deciding the status and timer of machine and updating the status file 
+\begin{DoxyCode}
+44                          \{
+45 
+46 \textcolor{comment}{//open the file contating address to serial port to get real time sensor data}
+47   ifstream idStream;     
+48   idStream.open(\textcolor{stringliteral}{"idfile.dat"});
+49   \textcolor{keywordtype}{string} serialObt;
+50   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 1; i <= 3; i++)    \textcolor{comment}{//go to the third line to get the address to serial port}
+51       getline(idStream, serialObt);
+52   \textcolor{keywordtype}{char} serialAd[13];
+53   strcpy(serialAd, serialObt.c\_str());
+54   serialAd[12]=\textcolor{charliteral}{'\(\backslash\)0'};
+55   cout<<\textcolor{stringliteral}{"Serial Address:--"} <<serialAd<<\textcolor{stringliteral}{"--"}<<endl;
+56   idStream.close();
+57 
+58   \hyperlink{classMovementData}{MovementData} M1;     \textcolor{comment}{//make a Machine class that represents this specific machine}
+59   \textcolor{keywordtype}{string} data;
+60   ifstream filestream;
+61   filestream.open(serialAd);         \textcolor{comment}{//open the virtual serial port to get the vibration data}
+62   \textcolor{keywordflow}{if} (filestream.good()) \{
+63     M1.\hyperlink{classMachine_aae30fc95cd4f4089b79bcd680cf774eb}{setResponse}(1);                \textcolor{comment}{//set response as 1 or 0 if the arduino is found/not found}
+64     \textcolor{keywordflow}{while} (1) \{
+65       M1.\hyperlink{classMachine_aa2691fd518ccf5bf91f641d168c6e67d}{setFileAsNOTUSED}();          \textcolor{comment}{//set inital status as machine not used}
+66 
+67       \textcolor{keywordflow}{if} (M1.\hyperlink{classMovementData_a0460eb813078fc9e9eef646bb495a8a3}{contVibCheck}(filestream)) \{           \textcolor{comment}{//check for continuous vibration of machine}
+68         cout << \textcolor{stringliteral}{"Machine Started"} << endl;
+69         \textcolor{keywordtype}{double} startTime = M1.\hyperlink{classMachine_a2fb11e330fa5e2b6a7134ee55ac7ef43}{getCurrentTime}();      \textcolor{comment}{//record the start time}
+70         \textcolor{keywordtype}{double} duration = 0;
+71         \textcolor{keywordtype}{int} counter = 1;
+72         \textcolor{keywordflow}{while} (duration < M1.\hyperlink{classMovementData_abd2ebde61b24ecee8634bc0ad5a9d79c}{CYCLEDURATION}) \{            \textcolor{comment}{//run the loop until cycle ends}
+73           duration = M1.\hyperlink{classMachine_a2fb11e330fa5e2b6a7134ee55ac7ef43}{getCurrentTime}() - startTime;    \textcolor{comment}{//caculate timer}
+74           counter++;                         \textcolor{comment}{//counter facilitates to create delay while accessing file to
+       avoid race conditions}
+75           \textcolor{keywordflow}{if} (counter % 10000000 == 0) \{                         
+76             \textcolor{keywordtype}{double} timeleft = (M1.\hyperlink{classMovementData_abd2ebde61b24ecee8634bc0ad5a9d79c}{CYCLEDURATION} - duration) / 60;     \textcolor{comment}{//update status and
+       timer in file}
+77             M1.\hyperlink{classMachine_a2596d7951c310917a62a2be50ff62b5a}{setFileAsUSE}((\textcolor{keywordtype}{int})timeleft + 1);                    
+78             counter = 0;
+79           \}
+80         \}
+81         cout << \textcolor{stringliteral}{"Machine Stopped"} << endl;              \textcolor{comment}{//change status after timer is over and machine is
+       unused again}
+82         M1.\hyperlink{classMachine_aa2691fd518ccf5bf91f641d168c6e67d}{setFileAsNOTUSED}();
+83       \}
+84     \}
+85   \}
+86 
+87   \textcolor{keywordflow}{else} \{
+88     M1.\hyperlink{classMachine_aae30fc95cd4f4089b79bcd680cf774eb}{setResponse}(0);                 \textcolor{comment}{//set response as false is sensor isn' connected or isn't
+       respondng}
+89     M1.\hyperlink{classMachine_aa9451bf11291573e776f72305b41646f}{setAsNoSensor}();
+90     cout<<\textcolor{stringliteral}{"Type EXIT to safely close the socket and exit."}<<endl;
+91   \}
+92 \}
+\end{DoxyCode}

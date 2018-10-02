@@ -1,0 +1,168 @@
+\hypertarget{classServerSocket}{}\section{Server\+Socket Class Reference}
+\label{classServerSocket}\index{Server\+Socket@{Server\+Socket}}
+
+
+{\ttfamily \#include $<$Socket.\+h$>$}
+
+Inheritance diagram for Server\+Socket\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classServerSocket}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classServerSocket_a2b3098589541243241ca25495155186c}{Server\+Socket} ()
+\item 
+\hyperlink{classServerSocket_a3dc1a31f740e4a8d69ae10c5dcb547d6}{Server\+Socket} (int port)
+\item 
+int \hyperlink{classServerSocket_a6cd7ad5bd162805cb4fa9f126205e046}{bind} (int port)
+\item 
+\hyperlink{classSocket}{Socket} $\ast$ \hyperlink{classServerSocket_accc3d56d42aa50a5f3c920cf0b26959b}{accept} ()
+\item 
+int \hyperlink{classServerSocket_a3eac38fb0cc7686f758f1bc77e1b1f6b}{get\+Bound} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classServerSocket_ae7e043fe5c2a7abdcc3d83219fe5106f}{bound}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classServerSocket_a2b3098589541243241ca25495155186c}{}\index{Server\+Socket@{Server\+Socket}!Server\+Socket@{Server\+Socket}}
+\index{Server\+Socket@{Server\+Socket}!Server\+Socket@{Server\+Socket}}
+\subsubsection[{Server\+Socket()}]{\setlength{\rightskip}{0pt plus 5cm}Server\+Socket\+::\+Server\+Socket (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classServerSocket_a2b3098589541243241ca25495155186c}
+
+\begin{DoxyCode}
+64 : \hyperlink{classSocket_a93c96fe7bea2fc834c88786629fa041e}{Socket}() \{ \hyperlink{classServerSocket_ae7e043fe5c2a7abdcc3d83219fe5106f}{bound} = 0; \}
+\end{DoxyCode}
+\hypertarget{classServerSocket_a3dc1a31f740e4a8d69ae10c5dcb547d6}{}\index{Server\+Socket@{Server\+Socket}!Server\+Socket@{Server\+Socket}}
+\index{Server\+Socket@{Server\+Socket}!Server\+Socket@{Server\+Socket}}
+\subsubsection[{Server\+Socket(int port)}]{\setlength{\rightskip}{0pt plus 5cm}Server\+Socket\+::\+Server\+Socket (
+\begin{DoxyParamCaption}
+\item[{int}]{port}
+\end{DoxyParamCaption}
+)}\label{classServerSocket_a3dc1a31f740e4a8d69ae10c5dcb547d6}
+initialize a socket and attempt to associate a port with it 
+\begin{DoxyParams}{Parameters}
+{\em port} & T\+C\+P port number \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+113                                    : \hyperlink{classSocket_a93c96fe7bea2fc834c88786629fa041e}{Socket}() \{
+114   \hyperlink{classServerSocket_ae7e043fe5c2a7abdcc3d83219fe5106f}{bound} = 0;
+115   \hyperlink{classServerSocket_a6cd7ad5bd162805cb4fa9f126205e046}{bind}(port);
+116 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classServerSocket_accc3d56d42aa50a5f3c920cf0b26959b}{}\index{Server\+Socket@{Server\+Socket}!accept@{accept}}
+\index{accept@{accept}!Server\+Socket@{Server\+Socket}}
+\subsubsection[{accept()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Socket} $\ast$ Server\+Socket\+::accept (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classServerSocket_accc3d56d42aa50a5f3c920cf0b26959b}
+Wait for and accept one connection request from another process, potentially on a different host \begin{DoxyReturn}{Returns}
+Address of a newly allocated \hyperlink{classSocket}{Socket} for communication with another process. Return 0 if attempt to accept failed or if this server socket is not bound 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+143                              \{
+144   \textcolor{keywordflow}{if} (!\hyperlink{classServerSocket_ae7e043fe5c2a7abdcc3d83219fe5106f}{bound})
+145     \textcolor{keywordflow}{return} 0;
+146 
+147   \textcolor{keyword}{struct }sockaddr\_in ca; \textcolor{comment}{// socket address structure for the new client}
+148   socklen\_t size = \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct }sockaddr);
+149   \textcolor{keywordtype}{int} clientd;
+150 
+151   cout << \textcolor{stringliteral}{"Waiting for a incoming connection..."} << endl;
+152   \textcolor{keywordflow}{if} ((clientd = ::\hyperlink{classServerSocket_accc3d56d42aa50a5f3c920cf0b26959b}{accept}(\hyperlink{classSocket_a457f5e3f2429eb859f9e80f064073874}{descrip}, (\textcolor{keyword}{struct} sockaddr*) &ca, &size)) < 0) \{
+153     cerr << \textcolor{stringliteral}{"ServerSocket::accept() "} << strerror(errno) << endl;
+154     \textcolor{keywordflow}{return} 0;
+155   \}
+156   \textcolor{comment}{// ::accept() attempt was successful}
+157   \textcolor{comment}{/* Note:  Could retrieve the IP address of client from ca, size */}
+158 
+159   \textcolor{keywordflow}{return} \textcolor{keyword}{new} \hyperlink{classSocket_a93c96fe7bea2fc834c88786629fa041e}{Socket}(clientd);
+160 \}
+\end{DoxyCode}
+\hypertarget{classServerSocket_a6cd7ad5bd162805cb4fa9f126205e046}{}\index{Server\+Socket@{Server\+Socket}!bind@{bind}}
+\index{bind@{bind}!Server\+Socket@{Server\+Socket}}
+\subsubsection[{bind(int port)}]{\setlength{\rightskip}{0pt plus 5cm}int Server\+Socket\+::bind (
+\begin{DoxyParamCaption}
+\item[{int}]{port}
+\end{DoxyParamCaption}
+)}\label{classServerSocket_a6cd7ad5bd162805cb4fa9f126205e046}
+Associate a port with this server socket \begin{DoxyPrecond}{Precondition}
+State variable connected must be assigned before calling this method 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em port} & T\+C\+P port number \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+119                                \{
+120   \textcolor{keywordflow}{if} (\hyperlink{classServerSocket_ae7e043fe5c2a7abdcc3d83219fe5106f}{bound}) \{
+121     cerr << \textcolor{stringliteral}{"ServerSocket::bind() - already marked as bound, skipping"} << endl;
+122     \textcolor{keywordflow}{return} 0;
+123   \}
+124   \textcolor{comment}{// bound == 0}
+125 
+126   \textcolor{keyword}{struct }sockaddr\_in sa;
+127   sa.sin\_family = AF\_INET;
+128   sa.sin\_port = htons(port);
+129   sa.sin\_addr.s\_addr = INADDR\_ANY;
+130 
+131   \textcolor{keywordflow}{if} (::\hyperlink{classServerSocket_a6cd7ad5bd162805cb4fa9f126205e046}{bind}(\hyperlink{classSocket_a457f5e3f2429eb859f9e80f064073874}{descrip}, (\textcolor{keyword}{struct} sockaddr*) &sa, \textcolor{keyword}{sizeof}(sa)) < 0) \{
+132     cerr << \textcolor{stringliteral}{"ServerSocket::bind() bind "} << strerror(errno) << endl;
+133     \textcolor{keywordflow}{return} 0;
+134   \}
+135   \textcolor{keywordflow}{if} (::listen(\hyperlink{classSocket_a457f5e3f2429eb859f9e80f064073874}{descrip}, 5) < 0) \{
+136     cerr << \textcolor{stringliteral}{"ServerSocket::bind() listen "} << strerror(errno) << endl;
+137     \textcolor{keywordflow}{return} 0;
+138   \}
+139   \hyperlink{classServerSocket_ae7e043fe5c2a7abdcc3d83219fe5106f}{bound} = 1;
+140   \textcolor{keywordflow}{return} 1;  
+141 \}
+\end{DoxyCode}
+\hypertarget{classServerSocket_a3eac38fb0cc7686f758f1bc77e1b1f6b}{}\index{Server\+Socket@{Server\+Socket}!get\+Bound@{get\+Bound}}
+\index{get\+Bound@{get\+Bound}!Server\+Socket@{Server\+Socket}}
+\subsubsection[{get\+Bound()}]{\setlength{\rightskip}{0pt plus 5cm}int Server\+Socket\+::get\+Bound (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classServerSocket_a3eac38fb0cc7686f758f1bc77e1b1f6b}
+\begin{DoxyReturn}{Returns}
+Value of state variable bound 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+83 \{ \textcolor{keywordflow}{return} \hyperlink{classServerSocket_ae7e043fe5c2a7abdcc3d83219fe5106f}{bound}; \} 
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classServerSocket_ae7e043fe5c2a7abdcc3d83219fe5106f}{}\index{Server\+Socket@{Server\+Socket}!bound@{bound}}
+\index{bound@{bound}!Server\+Socket@{Server\+Socket}}
+\subsubsection[{bound}]{\setlength{\rightskip}{0pt plus 5cm}int Server\+Socket\+::bound\hspace{0.3cm}{\ttfamily [protected]}}\label{classServerSocket_ae7e043fe5c2a7abdcc3d83219fe5106f}
+non-\/zero if \hyperlink{classServerSocket_a6cd7ad5bd162805cb4fa9f126205e046}{bind()} succeeded on this socket 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Socket_8h}{Socket.\+h}\item 
+\hyperlink{Socket_8cpp}{Socket.\+cpp}\end{DoxyCompactItemize}

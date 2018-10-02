@@ -1,0 +1,152 @@
+\hypertarget{classFloor}{}\section{Floor Class Reference}
+\label{classFloor}\index{Floor@{Floor}}
+
+
+{\ttfamily \#include $<$floor.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFloor_af8204bb1f83f7d5c34fa924e29b33f20}{Floor} (const char $\ast$Machine\+Id)
+\item 
+void \hyperlink{classFloor_a055387e660f3d676c4a1376bf2ad8806}{add\+Machine} (const char $\ast$Machine\+Id)
+\item 
+void \hyperlink{classFloor_a5fefb22532eb29c64321f999cec01fed}{show\+Machine\+List} (ostream \&ostr)
+\item 
+\hyperlink{classMachine}{Machine} \& \hyperlink{classFloor_ac6f944e54c67af81a6cbf20c425d2287}{operator\mbox{[}$\,$\mbox{]}} (int n)
+\item 
+int \hyperlink{classFloor_af18e931e369fdf479b8f0b0184bcad41}{get\+Floor\+Id} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classFloor_a1f49915f73b08b01fb2265a7ec0aca03}{pull\+Floor\+Number} (const char $\ast$Machine\+Id)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classFloor_a0a49a73667bcc6f03bd12a327961c2c9}{Floor\+Id}
+\item 
+int \hyperlink{classFloor_a1d1b0459a2779b9ebe10b0638dd7e673}{Machine\+Qty}
+\item 
+\hyperlink{classMachine}{Machine} $\ast$$\ast$ \hyperlink{classFloor_a654069a23fdc0108f72824e91e12f416}{All\+Machine\+List}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classFloor_af8204bb1f83f7d5c34fa924e29b33f20}{}\index{Floor@{Floor}!Floor@{Floor}}
+\index{Floor@{Floor}!Floor@{Floor}}
+\subsubsection[{Floor(const char $\ast$\+Machine\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}Floor\+::\+Floor (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{Machine\+Id}
+\end{DoxyParamCaption}
+)}\label{classFloor_af8204bb1f83f7d5c34fa924e29b33f20}
+
+\begin{DoxyCode}
+6                                   \{
+7         \hyperlink{classFloor_a0a49a73667bcc6f03bd12a327961c2c9}{FloorId}=\hyperlink{classFloor_a1f49915f73b08b01fb2265a7ec0aca03}{pullFloorNumber}(MachineId);
+8         \hyperlink{classFloor_a1d1b0459a2779b9ebe10b0638dd7e673}{MachineQty}=0;
+9         \hyperlink{classFloor_a654069a23fdc0108f72824e91e12f416}{AllMachineList}= \textcolor{keyword}{new} \hyperlink{classMachine}{Machine}* [999];
+10         \hyperlink{classFloor_a654069a23fdc0108f72824e91e12f416}{AllMachineList}[\hyperlink{classFloor_a1d1b0459a2779b9ebe10b0638dd7e673}{MachineQty}]=\textcolor{keyword}{new} \hyperlink{classMachine}{Machine}(MachineId);
+11         \hyperlink{classFloor_a1d1b0459a2779b9ebe10b0638dd7e673}{MachineQty}++;
+12     \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classFloor_a055387e660f3d676c4a1376bf2ad8806}{}\index{Floor@{Floor}!add\+Machine@{add\+Machine}}
+\index{add\+Machine@{add\+Machine}!Floor@{Floor}}
+\subsubsection[{add\+Machine(const char $\ast$\+Machine\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}void Floor\+::add\+Machine (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{Machine\+Id}
+\end{DoxyParamCaption}
+)}\label{classFloor_a055387e660f3d676c4a1376bf2ad8806}
+
+\begin{DoxyCode}
+14                                             \{
+15         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<\hyperlink{classFloor_a1d1b0459a2779b9ebe10b0638dd7e673}{MachineQty}; i++)\{
+16             \textcolor{keywordflow}{if} (!strcmp(MachineId,\hyperlink{classFloor_a654069a23fdc0108f72824e91e12f416}{AllMachineList}[i]->getMachineId()))\{
+17                 cout<<\textcolor{stringliteral}{"Double entry for machine. Duplication avoided"}<<endl;
+18                 \textcolor{keywordflow}{return};     \textcolor{comment}{//escaping out of the function }
+19             \}\}
+20         \hyperlink{classFloor_a654069a23fdc0108f72824e91e12f416}{AllMachineList}[\hyperlink{classFloor_a1d1b0459a2779b9ebe10b0638dd7e673}{MachineQty}]=\textcolor{keyword}{new} \hyperlink{classMachine}{Machine}(MachineId);
+21         MachineQty++;
+22     \}
+\end{DoxyCode}
+\hypertarget{classFloor_af18e931e369fdf479b8f0b0184bcad41}{}\index{Floor@{Floor}!get\+Floor\+Id@{get\+Floor\+Id}}
+\index{get\+Floor\+Id@{get\+Floor\+Id}!Floor@{Floor}}
+\subsubsection[{get\+Floor\+Id(void)}]{\setlength{\rightskip}{0pt plus 5cm}int Floor\+::get\+Floor\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{classFloor_af18e931e369fdf479b8f0b0184bcad41}
+
+\begin{DoxyCode}
+33                          \{
+34         \textcolor{keywordflow}{return} \hyperlink{classFloor_a0a49a73667bcc6f03bd12a327961c2c9}{FloorId};
+35     \}\end{DoxyCode}
+\hypertarget{classFloor_ac6f944e54c67af81a6cbf20c425d2287}{}\index{Floor@{Floor}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!Floor@{Floor}}
+\subsubsection[{operator[](int n)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Machine} \& Floor\+::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}\label{classFloor_ac6f944e54c67af81a6cbf20c425d2287}
+
+\begin{DoxyCode}
+29                                 \{
+30         \textcolor{keywordflow}{return} *\hyperlink{classFloor_a654069a23fdc0108f72824e91e12f416}{AllMachineList}[n];
+31     \}
+\end{DoxyCode}
+\hypertarget{classFloor_a1f49915f73b08b01fb2265a7ec0aca03}{}\index{Floor@{Floor}!pull\+Floor\+Number@{pull\+Floor\+Number}}
+\index{pull\+Floor\+Number@{pull\+Floor\+Number}!Floor@{Floor}}
+\subsubsection[{pull\+Floor\+Number(const char $\ast$\+Machine\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}int Floor\+::pull\+Floor\+Number (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{Machine\+Id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{classFloor_a1f49915f73b08b01fb2265a7ec0aca03}
+Array to pointers to each machine in the floor 
+\begin{DoxyCode}
+17                                                \{
+18     \textcolor{keywordtype}{char} num[3];
+19     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=4; i<6; i++)
+20         num[i-4]=MachineId[i];
+21     num[2]=\textcolor{charliteral}{'\(\backslash\)0'};
+22     stringstream convert(num); 
+23     \textcolor{keywordtype}{int} r;
+24     convert>>r;
+25     \textcolor{keywordflow}{return} r;  \textcolor{comment}{//int r<<stringstream(num)}
+26 \}
+\end{DoxyCode}
+\hypertarget{classFloor_a5fefb22532eb29c64321f999cec01fed}{}\index{Floor@{Floor}!show\+Machine\+List@{show\+Machine\+List}}
+\index{show\+Machine\+List@{show\+Machine\+List}!Floor@{Floor}}
+\subsubsection[{show\+Machine\+List(ostream \&ostr)}]{\setlength{\rightskip}{0pt plus 5cm}void Floor\+::show\+Machine\+List (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{ostr}
+\end{DoxyParamCaption}
+)}\label{classFloor_a5fefb22532eb29c64321f999cec01fed}
+
+\begin{DoxyCode}
+24                                         \{
+25         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<\hyperlink{classFloor_a1d1b0459a2779b9ebe10b0638dd7e673}{MachineQty}; i++)\{
+26             ostr<<\hyperlink{classFloor_a654069a23fdc0108f72824e91e12f416}{AllMachineList}[i]->\hyperlink{classMachine_ae59177ed732c7ee3d80797310efba80d}{getMachineId}()<<endl;
+27     \}\}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classFloor_a654069a23fdc0108f72824e91e12f416}{}\index{Floor@{Floor}!All\+Machine\+List@{All\+Machine\+List}}
+\index{All\+Machine\+List@{All\+Machine\+List}!Floor@{Floor}}
+\subsubsection[{All\+Machine\+List}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Machine}$\ast$$\ast$ Floor\+::\+All\+Machine\+List\hspace{0.3cm}{\ttfamily [private]}}\label{classFloor_a654069a23fdc0108f72824e91e12f416}
+Number of machines in each floor \hypertarget{classFloor_a0a49a73667bcc6f03bd12a327961c2c9}{}\index{Floor@{Floor}!Floor\+Id@{Floor\+Id}}
+\index{Floor\+Id@{Floor\+Id}!Floor@{Floor}}
+\subsubsection[{Floor\+Id}]{\setlength{\rightskip}{0pt plus 5cm}int Floor\+::\+Floor\+Id\hspace{0.3cm}{\ttfamily [private]}}\label{classFloor_a0a49a73667bcc6f03bd12a327961c2c9}
+\hypertarget{classFloor_a1d1b0459a2779b9ebe10b0638dd7e673}{}\index{Floor@{Floor}!Machine\+Qty@{Machine\+Qty}}
+\index{Machine\+Qty@{Machine\+Qty}!Floor@{Floor}}
+\subsubsection[{Machine\+Qty}]{\setlength{\rightskip}{0pt plus 5cm}int Floor\+::\+Machine\+Qty\hspace{0.3cm}{\ttfamily [private]}}\label{classFloor_a1d1b0459a2779b9ebe10b0638dd7e673}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{floor_8h}{floor.\+h}\item 
+\hyperlink{floor_8cpp}{floor.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,194 @@
+\hypertarget{classDorm}{}\section{Dorm Class Reference}
+\label{classDorm}\index{Dorm@{Dorm}}
+
+
+{\ttfamily \#include $<$dorm.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDorm_ade9d5f0af745d63ed64aca2c4c43c075}{Dorm} (const char $\ast$Dorm\+Name\+N, const char $\ast$Dorm\+Id\+N)
+\item 
+void \hyperlink{classDorm_a6a29bc53aa4e1d3dd5ba9ae992825fea}{add\+Floor} (const char $\ast$Machine\+Id)
+\item 
+void \hyperlink{classDorm_ac7f1c2c4f2df20ae95edb1c94acc8292}{show\+Floor\+List} (ostream \&ostr)
+\item 
+\hyperlink{classFloor}{Floor} \& \hyperlink{classDorm_a3273d514b7676789d69f76ca3eddd1f5}{operator\mbox{[}$\,$\mbox{]}} (int n)
+\item 
+char $\ast$ \hyperlink{classDorm_a129fd869bbd0a5f3288a9f915c432430}{get\+Dorm\+Id} (void)
+\item 
+char $\ast$ \hyperlink{classDorm_a901bdbaa576fb0fc4426d5b6e8779109}{get\+Dorm\+Name} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classDorm_a020a53d32768e94e0025b11cf143794c}{pull\+Floor\+Number} (const char $\ast$Machine\+Id)
+\item 
+char $\ast$ \hyperlink{classDorm_a1930daf57fe048209767188141a5c316}{makecopy} (const char $\ast$ch)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{classDorm_a87128b7e2f33c987306fbdfd750b30e7}{Dorm\+Id}
+\item 
+char $\ast$ \hyperlink{classDorm_aa0155c1025ef94bf9d8356285d43d9d5}{Dorm\+Name}
+\item 
+int \hyperlink{classDorm_a1f347c933203cb469536f9b49e99fe1b}{Floor\+Qty}
+\item 
+\hyperlink{classFloor}{Floor} $\ast$$\ast$ \hyperlink{classDorm_a223c00d027dae0931caf1cda7b042925}{All\+Floor\+List}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classDorm_ade9d5f0af745d63ed64aca2c4c43c075}{}\index{Dorm@{Dorm}!Dorm@{Dorm}}
+\index{Dorm@{Dorm}!Dorm@{Dorm}}
+\subsubsection[{Dorm(const char $\ast$\+Dorm\+Name\+N, const char $\ast$\+Dorm\+Id\+N)}]{\setlength{\rightskip}{0pt plus 5cm}Dorm\+::\+Dorm (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{Dorm\+Name\+N, }
+\item[{const char $\ast$}]{Dorm\+Id\+N}
+\end{DoxyParamCaption}
+)}\label{classDorm_ade9d5f0af745d63ed64aca2c4c43c075}
+
+\begin{DoxyCode}
+7                                                      \{
+8         \hyperlink{classDorm_aa0155c1025ef94bf9d8356285d43d9d5}{DormName}=\hyperlink{classDorm_a1930daf57fe048209767188141a5c316}{makecopy}(DormNameN);
+9         \hyperlink{classDorm_a87128b7e2f33c987306fbdfd750b30e7}{DormId}=\hyperlink{classDorm_a1930daf57fe048209767188141a5c316}{makecopy}(DormIdN);
+10         \hyperlink{classDorm_a223c00d027dae0931caf1cda7b042925}{AllFloorList}= \textcolor{keyword}{new} \hyperlink{classFloor}{Floor}* [99];
+11         \hyperlink{classDorm_a1f347c933203cb469536f9b49e99fe1b}{FloorQty}=0;     
+12     \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDorm_a6a29bc53aa4e1d3dd5ba9ae992825fea}{}\index{Dorm@{Dorm}!add\+Floor@{add\+Floor}}
+\index{add\+Floor@{add\+Floor}!Dorm@{Dorm}}
+\subsubsection[{add\+Floor(const char $\ast$\+Machine\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}void Dorm\+::add\+Floor (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{Machine\+Id}
+\end{DoxyParamCaption}
+)}\label{classDorm_a6a29bc53aa4e1d3dd5ba9ae992825fea}
+
+\begin{DoxyCode}
+14                                          \{
+15         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<\hyperlink{classDorm_a1f347c933203cb469536f9b49e99fe1b}{FloorQty}; i++)\{
+16             \textcolor{keywordflow}{if} (\hyperlink{classDorm_a020a53d32768e94e0025b11cf143794c}{pullFloorNumber}(MachineId)==\hyperlink{classDorm_a223c00d027dae0931caf1cda7b042925}{AllFloorList}[i]->getFloorId())\{
+17                 \hyperlink{classDorm_a223c00d027dae0931caf1cda7b042925}{AllFloorList}[i]->\hyperlink{classFloor_a055387e660f3d676c4a1376bf2ad8806}{addMachine}(MachineId);
+18                 \textcolor{keywordflow}{return};
+19             \}\}
+20             \hyperlink{classDorm_a223c00d027dae0931caf1cda7b042925}{AllFloorList}[\hyperlink{classDorm_a1f347c933203cb469536f9b49e99fe1b}{FloorQty}]= \textcolor{keyword}{new} \hyperlink{classFloor}{Floor}(MachineId);
+21             FloorQty++;     
+22     \}
+\end{DoxyCode}
+\hypertarget{classDorm_a129fd869bbd0a5f3288a9f915c432430}{}\index{Dorm@{Dorm}!get\+Dorm\+Id@{get\+Dorm\+Id}}
+\index{get\+Dorm\+Id@{get\+Dorm\+Id}!Dorm@{Dorm}}
+\subsubsection[{get\+Dorm\+Id(void)}]{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Dorm\+::get\+Dorm\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{classDorm_a129fd869bbd0a5f3288a9f915c432430}
+
+\begin{DoxyCode}
+33                           \{
+34         \textcolor{keywordflow}{return} \hyperlink{classDorm_a87128b7e2f33c987306fbdfd750b30e7}{DormId};
+35     \}
+\end{DoxyCode}
+\hypertarget{classDorm_a901bdbaa576fb0fc4426d5b6e8779109}{}\index{Dorm@{Dorm}!get\+Dorm\+Name@{get\+Dorm\+Name}}
+\index{get\+Dorm\+Name@{get\+Dorm\+Name}!Dorm@{Dorm}}
+\subsubsection[{get\+Dorm\+Name(void)}]{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Dorm\+::get\+Dorm\+Name (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{classDorm_a901bdbaa576fb0fc4426d5b6e8779109}
+
+\begin{DoxyCode}
+37                             \{
+38         \textcolor{keywordflow}{return} \hyperlink{classDorm_aa0155c1025ef94bf9d8356285d43d9d5}{DormName};
+39     \}
+\end{DoxyCode}
+\hypertarget{classDorm_a1930daf57fe048209767188141a5c316}{}\index{Dorm@{Dorm}!makecopy@{makecopy}}
+\index{makecopy@{makecopy}!Dorm@{Dorm}}
+\subsubsection[{makecopy(const char $\ast$ch)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Dorm\+::makecopy (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{ch}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{classDorm_a1930daf57fe048209767188141a5c316}
+
+\begin{DoxyCode}
+29                                     \{        \textcolor{comment}{//the makecopy fuction to create copied of c style strings}
+30     \textcolor{keywordtype}{char} * newchar;
+31     \textcolor{keywordtype}{int} i=0;
+32     \textcolor{keywordflow}{for} (i=0; ch[i]!=\textcolor{charliteral}{'\(\backslash\)0'}; i++);
+33     newchar= \textcolor{keyword}{new} \textcolor{keywordtype}{char} [i+1];
+34     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<i+1; j++)
+35         newchar[j]=ch[j];
+36     \textcolor{keywordflow}{return} newchar;
+37     \}
+\end{DoxyCode}
+\hypertarget{classDorm_a3273d514b7676789d69f76ca3eddd1f5}{}\index{Dorm@{Dorm}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!Dorm@{Dorm}}
+\subsubsection[{operator[](int n)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Floor} \& Dorm\+::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}\label{classDorm_a3273d514b7676789d69f76ca3eddd1f5}
+
+\begin{DoxyCode}
+29                              \{
+30         \textcolor{keywordflow}{return} *\hyperlink{classDorm_a223c00d027dae0931caf1cda7b042925}{AllFloorList}[n];
+31     \}
+\end{DoxyCode}
+\hypertarget{classDorm_a020a53d32768e94e0025b11cf143794c}{}\index{Dorm@{Dorm}!pull\+Floor\+Number@{pull\+Floor\+Number}}
+\index{pull\+Floor\+Number@{pull\+Floor\+Number}!Dorm@{Dorm}}
+\subsubsection[{pull\+Floor\+Number(const char $\ast$\+Machine\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}int Dorm\+::pull\+Floor\+Number (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{Machine\+Id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{classDorm_a020a53d32768e94e0025b11cf143794c}
+Array to pointers to each floor class 
+\begin{DoxyCode}
+18                                                \{
+19     \textcolor{keywordtype}{char} num[3];
+20     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=4; i<6; i++)
+21         num[i-4]=MachineId[i];
+22     num[2]=\textcolor{charliteral}{'\(\backslash\)0'};
+23     stringstream convert(num); 
+24     \textcolor{keywordtype}{int} r;
+25     convert>>r;
+26     \textcolor{keywordflow}{return} r;  \textcolor{comment}{//int r<<stringstream(num)}
+27     \}
+\end{DoxyCode}
+\hypertarget{classDorm_ac7f1c2c4f2df20ae95edb1c94acc8292}{}\index{Dorm@{Dorm}!show\+Floor\+List@{show\+Floor\+List}}
+\index{show\+Floor\+List@{show\+Floor\+List}!Dorm@{Dorm}}
+\subsubsection[{show\+Floor\+List(ostream \&ostr)}]{\setlength{\rightskip}{0pt plus 5cm}void Dorm\+::show\+Floor\+List (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{ostr}
+\end{DoxyParamCaption}
+)}\label{classDorm_ac7f1c2c4f2df20ae95edb1c94acc8292}
+
+\begin{DoxyCode}
+24                                      \{
+25         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<\hyperlink{classDorm_a1f347c933203cb469536f9b49e99fe1b}{FloorQty}; i++)
+26             ostr <<\hyperlink{classDorm_a223c00d027dae0931caf1cda7b042925}{AllFloorList}[i]->getFloorId()<<endl;     
+27     \} 
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classDorm_a223c00d027dae0931caf1cda7b042925}{}\index{Dorm@{Dorm}!All\+Floor\+List@{All\+Floor\+List}}
+\index{All\+Floor\+List@{All\+Floor\+List}!Dorm@{Dorm}}
+\subsubsection[{All\+Floor\+List}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Floor}$\ast$$\ast$ Dorm\+::\+All\+Floor\+List\hspace{0.3cm}{\ttfamily [private]}}\label{classDorm_a223c00d027dae0931caf1cda7b042925}
+Number of floors \hypertarget{classDorm_a87128b7e2f33c987306fbdfd750b30e7}{}\index{Dorm@{Dorm}!Dorm\+Id@{Dorm\+Id}}
+\index{Dorm\+Id@{Dorm\+Id}!Dorm@{Dorm}}
+\subsubsection[{Dorm\+Id}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Dorm\+::\+Dorm\+Id\hspace{0.3cm}{\ttfamily [private]}}\label{classDorm_a87128b7e2f33c987306fbdfd750b30e7}
+\hypertarget{classDorm_aa0155c1025ef94bf9d8356285d43d9d5}{}\index{Dorm@{Dorm}!Dorm\+Name@{Dorm\+Name}}
+\index{Dorm\+Name@{Dorm\+Name}!Dorm@{Dorm}}
+\subsubsection[{Dorm\+Name}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Dorm\+::\+Dorm\+Name\hspace{0.3cm}{\ttfamily [private]}}\label{classDorm_aa0155c1025ef94bf9d8356285d43d9d5}
+3 letters Id for a dorm, ex. ell-\/$>$ Ellingson \hypertarget{classDorm_a1f347c933203cb469536f9b49e99fe1b}{}\index{Dorm@{Dorm}!Floor\+Qty@{Floor\+Qty}}
+\index{Floor\+Qty@{Floor\+Qty}!Dorm@{Dorm}}
+\subsubsection[{Floor\+Qty}]{\setlength{\rightskip}{0pt plus 5cm}int Dorm\+::\+Floor\+Qty\hspace{0.3cm}{\ttfamily [private]}}\label{classDorm_a1f347c933203cb469536f9b49e99fe1b}
+Name of the dorm 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{dorm_8h}{dorm.\+h}\item 
+\hyperlink{dorm_8cpp}{dorm.\+cpp}\end{DoxyCompactItemize}

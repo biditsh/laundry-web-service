@@ -1,0 +1,123 @@
+\hypertarget{helpers_8cpp}{}\section{helpers.\+cpp File Reference}
+\label{helpers_8cpp}\index{helpers.\+cpp@{helpers.\+cpp}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$cstring$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{helpers_8cpp_ad5e19f0602395b0c764f99d9aacd5255}{\+\_\+\+H\+E\+L\+P\+E\+R\+S\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{helpers_8cpp_af94064641e473a391db0479f59fe41ae}{makecopy} (const char $\ast$ch)
+\item 
+char $\ast$ \hyperlink{helpers_8cpp_a8acd8a3b03105d0fdc8257837ef6a10c}{pull\+Dorm\+Id} (const char $\ast$Machine\+Id)
+\item 
+int \hyperlink{helpers_8cpp_ac9b2f454dbcd3c66773479f9d8fc90a1}{pull\+Floor\+Number} (const char $\ast$Machine\+Id)
+\item 
+int \hyperlink{helpers_8cpp_a95b8093c0fd230c03bddc96aece12b06}{pull\+Machine\+Id\+No} (const char $\ast$Machine\+Id)
+\item 
+char \hyperlink{helpers_8cpp_a7d3a5ceb4e840dc090a9e759e831862f}{pull\+Machine\+Type} (const char $\ast$Machine\+Id)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{helpers_8cpp_ad5e19f0602395b0c764f99d9aacd5255}{}\index{helpers.\+cpp@{helpers.\+cpp}!\+\_\+\+H\+E\+L\+P\+E\+R\+S\+\_\+@{\+\_\+\+H\+E\+L\+P\+E\+R\+S\+\_\+}}
+\index{\+\_\+\+H\+E\+L\+P\+E\+R\+S\+\_\+@{\+\_\+\+H\+E\+L\+P\+E\+R\+S\+\_\+}!helpers.\+cpp@{helpers.\+cpp}}
+\subsubsection[{\+\_\+\+H\+E\+L\+P\+E\+R\+S\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}\#define \+\_\+\+H\+E\+L\+P\+E\+R\+S\+\_\+}\label{helpers_8cpp_ad5e19f0602395b0c764f99d9aacd5255}
+
+
+\subsection{Function Documentation}
+\hypertarget{helpers_8cpp_af94064641e473a391db0479f59fe41ae}{}\index{helpers.\+cpp@{helpers.\+cpp}!makecopy@{makecopy}}
+\index{makecopy@{makecopy}!helpers.\+cpp@{helpers.\+cpp}}
+\subsubsection[{makecopy(const char $\ast$ch)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ makecopy (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{ch}
+\end{DoxyParamCaption}
+)}\label{helpers_8cpp_af94064641e473a391db0479f59fe41ae}
+
+\begin{DoxyCode}
+10                                 \{        \textcolor{comment}{//the makecopy fuction to create copied of c style strings}
+11     \textcolor{keywordtype}{char} * newchar;
+12     \textcolor{keywordtype}{int} i=0;
+13     \textcolor{keywordflow}{for} (i=0; ch[i]!=\textcolor{charliteral}{'\(\backslash\)0'}; i++);
+14     newchar= \textcolor{keyword}{new} \textcolor{keywordtype}{char} [i+1];
+15     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<i+1; j++)
+16         newchar[j]=ch[j];
+17     \textcolor{keywordflow}{return} newchar;
+18 \}
+\end{DoxyCode}
+\hypertarget{helpers_8cpp_a8acd8a3b03105d0fdc8257837ef6a10c}{}\index{helpers.\+cpp@{helpers.\+cpp}!pull\+Dorm\+Id@{pull\+Dorm\+Id}}
+\index{pull\+Dorm\+Id@{pull\+Dorm\+Id}!helpers.\+cpp@{helpers.\+cpp}}
+\subsubsection[{pull\+Dorm\+Id(const char $\ast$\+Machine\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ pull\+Dorm\+Id (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{Machine\+Id}
+\end{DoxyParamCaption}
+)}\label{helpers_8cpp_a8acd8a3b03105d0fdc8257837ef6a10c}
+
+\begin{DoxyCode}
+20                                         \{
+21     \textcolor{keywordtype}{char}* name;
+22     name= \textcolor{keyword}{new} \textcolor{keywordtype}{char}[4];
+23     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<3; i++)
+24         name[i]=MachineId[i];
+25     name[3]=\textcolor{charliteral}{'\(\backslash\)0'};
+26     \textcolor{keywordflow}{return} name;
+27 \}
+\end{DoxyCode}
+\hypertarget{helpers_8cpp_ac9b2f454dbcd3c66773479f9d8fc90a1}{}\index{helpers.\+cpp@{helpers.\+cpp}!pull\+Floor\+Number@{pull\+Floor\+Number}}
+\index{pull\+Floor\+Number@{pull\+Floor\+Number}!helpers.\+cpp@{helpers.\+cpp}}
+\subsubsection[{pull\+Floor\+Number(const char $\ast$\+Machine\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}int pull\+Floor\+Number (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{Machine\+Id}
+\end{DoxyParamCaption}
+)}\label{helpers_8cpp_ac9b2f454dbcd3c66773479f9d8fc90a1}
+
+\begin{DoxyCode}
+29                                            \{
+30     \textcolor{keywordtype}{char} num[3];
+31     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=4; i<6; i++)
+32         num[i-4]=MachineId[i];
+33     num[2]=\textcolor{charliteral}{'\(\backslash\)0'};
+34     stringstream convert(num); 
+35     \textcolor{keywordtype}{int} r;
+36     convert>>r;
+37     \textcolor{keywordflow}{return} r;  \textcolor{comment}{//int r<<stringstream(num)}
+38 \}
+\end{DoxyCode}
+\hypertarget{helpers_8cpp_a95b8093c0fd230c03bddc96aece12b06}{}\index{helpers.\+cpp@{helpers.\+cpp}!pull\+Machine\+Id\+No@{pull\+Machine\+Id\+No}}
+\index{pull\+Machine\+Id\+No@{pull\+Machine\+Id\+No}!helpers.\+cpp@{helpers.\+cpp}}
+\subsubsection[{pull\+Machine\+Id\+No(const char $\ast$\+Machine\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}int pull\+Machine\+Id\+No (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{Machine\+Id}
+\end{DoxyParamCaption}
+)}\label{helpers_8cpp_a95b8093c0fd230c03bddc96aece12b06}
+
+\begin{DoxyCode}
+40                                            \{
+41     \textcolor{keywordtype}{char} num[4];
+42     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=7; i<10; i++)
+43         num[i-7]=MachineId[i];
+44     num[3]=\textcolor{charliteral}{'\(\backslash\)0'};
+45     stringstream convert(num); 
+46     \textcolor{keywordtype}{int} r;
+47     convert>>r;
+48     \textcolor{keywordflow}{return} r;  \textcolor{comment}{//int r<<stringstream(num)}
+49 \}
+\end{DoxyCode}
+\hypertarget{helpers_8cpp_a7d3a5ceb4e840dc090a9e759e831862f}{}\index{helpers.\+cpp@{helpers.\+cpp}!pull\+Machine\+Type@{pull\+Machine\+Type}}
+\index{pull\+Machine\+Type@{pull\+Machine\+Type}!helpers.\+cpp@{helpers.\+cpp}}
+\subsubsection[{pull\+Machine\+Type(const char $\ast$\+Machine\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}char pull\+Machine\+Type (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{Machine\+Id}
+\end{DoxyParamCaption}
+)}\label{helpers_8cpp_a7d3a5ceb4e840dc090a9e759e831862f}
+
+\begin{DoxyCode}
+51                                             \{
+52     \textcolor{keywordflow}{return} MachineId[11];           \textcolor{comment}{//ell-12-145-l}
+53 \}
+\end{DoxyCode}

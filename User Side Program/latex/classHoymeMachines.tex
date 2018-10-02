@@ -1,0 +1,125 @@
+\hypertarget{classHoymeMachines}{}\section{Hoyme\+Machines Class Reference}
+\label{classHoymeMachines}\index{Hoyme\+Machines@{Hoyme\+Machines}}
+
+
+{\ttfamily \#include $<$hoymemachines.\+h$>$}
+
+Inheritance diagram for Hoyme\+Machines\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classHoymeMachines}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHoymeMachines_af118b420693258a5a4ec10810f02a7ec}{Hoyme\+Machines} (Q\+Widget $\ast$parent=0)
+\item 
+\hyperlink{classHoymeMachines_a6aa418fc62c58137171e313c1ace4ccf}{$\sim$\+Hoyme\+Machines} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classHoymeMachines_a34b497f41441b0dd94fc0181798daa92}{on\+\_\+push\+Button\+\_\+clicked} ()
+\item 
+void \hyperlink{classHoymeMachines_ae6dbb429a5f917a656d34f42de4f32fe}{on\+\_\+push\+Button\+\_\+2\+\_\+clicked} ()
+\item 
+void \hyperlink{classHoymeMachines_a884d8539f9bdeb71acbe4a7381114f42}{on\+\_\+push\+Button\+\_\+3\+\_\+clicked} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Hoyme\+Machines $\ast$ \hyperlink{classHoymeMachines_a72f3067484ba8b1cfa5dbb5e1b7025ba}{ui}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classHoymeMachines_af118b420693258a5a4ec10810f02a7ec}{}\index{Hoyme\+Machines@{Hoyme\+Machines}!Hoyme\+Machines@{Hoyme\+Machines}}
+\index{Hoyme\+Machines@{Hoyme\+Machines}!Hoyme\+Machines@{Hoyme\+Machines}}
+\subsubsection[{Hoyme\+Machines(\+Q\+Widget $\ast$parent=0)}]{\setlength{\rightskip}{0pt plus 5cm}Hoyme\+Machines\+::\+Hoyme\+Machines (
+\begin{DoxyParamCaption}
+\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classHoymeMachines_af118b420693258a5a4ec10810f02a7ec}
+
+\begin{DoxyCode}
+16                                             :
+17     QDialog(parent),
+18     \hyperlink{classHoymeMachines_a72f3067484ba8b1cfa5dbb5e1b7025ba}{ui}(\textcolor{keyword}{new} Ui::HoymeMachines)
+19 \{
+20     \hyperlink{classHoymeMachines_a72f3067484ba8b1cfa5dbb5e1b7025ba}{ui}->setupUi(\textcolor{keyword}{this});
+21 \}
+\end{DoxyCode}
+\hypertarget{classHoymeMachines_a6aa418fc62c58137171e313c1ace4ccf}{}\index{Hoyme\+Machines@{Hoyme\+Machines}!````~Hoyme\+Machines@{$\sim$\+Hoyme\+Machines}}
+\index{````~Hoyme\+Machines@{$\sim$\+Hoyme\+Machines}!Hoyme\+Machines@{Hoyme\+Machines}}
+\subsubsection[{$\sim$\+Hoyme\+Machines()}]{\setlength{\rightskip}{0pt plus 5cm}Hoyme\+Machines\+::$\sim$\+Hoyme\+Machines (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classHoymeMachines_a6aa418fc62c58137171e313c1ace4ccf}
+
+\begin{DoxyCode}
+24 \{
+25     \textcolor{keyword}{delete} \hyperlink{classHoymeMachines_a72f3067484ba8b1cfa5dbb5e1b7025ba}{ui};
+26 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classHoymeMachines_ae6dbb429a5f917a656d34f42de4f32fe}{}\index{Hoyme\+Machines@{Hoyme\+Machines}!on\+\_\+push\+Button\+\_\+2\+\_\+clicked@{on\+\_\+push\+Button\+\_\+2\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+\_\+2\+\_\+clicked@{on\+\_\+push\+Button\+\_\+2\+\_\+clicked}!Hoyme\+Machines@{Hoyme\+Machines}}
+\subsubsection[{on\+\_\+push\+Button\+\_\+2\+\_\+clicked}]{\setlength{\rightskip}{0pt plus 5cm}void Hoyme\+Machines\+::on\+\_\+push\+Button\+\_\+2\+\_\+clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}\label{classHoymeMachines_ae6dbb429a5f917a656d34f42de4f32fe}
+
+\begin{DoxyCode}
+38 \{
+39     \hyperlink{classCLIENT}{CLIENT} client2 (\textcolor{stringliteral}{"rns202-13.cs.stolaf.edu"},25274, \textcolor{stringliteral}{"hmh-01-124-l"} );
+40     \hyperlink{classHoymeMachines_a72f3067484ba8b1cfa5dbb5e1b7025ba}{ui}->label\_2->setText(QString(client2.returnMachineStatus().c\_str()));
+41     \hyperlink{classHoymeMachines_a72f3067484ba8b1cfa5dbb5e1b7025ba}{ui}->label\_5->setText(QString(client2.returnMachineTimer().c\_str()));
+42 \}
+\end{DoxyCode}
+\hypertarget{classHoymeMachines_a884d8539f9bdeb71acbe4a7381114f42}{}\index{Hoyme\+Machines@{Hoyme\+Machines}!on\+\_\+push\+Button\+\_\+3\+\_\+clicked@{on\+\_\+push\+Button\+\_\+3\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+\_\+3\+\_\+clicked@{on\+\_\+push\+Button\+\_\+3\+\_\+clicked}!Hoyme\+Machines@{Hoyme\+Machines}}
+\subsubsection[{on\+\_\+push\+Button\+\_\+3\+\_\+clicked}]{\setlength{\rightskip}{0pt plus 5cm}void Hoyme\+Machines\+::on\+\_\+push\+Button\+\_\+3\+\_\+clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}\label{classHoymeMachines_a884d8539f9bdeb71acbe4a7381114f42}
+
+\begin{DoxyCode}
+46 \{
+47     \hyperlink{classHoymeMachines_a72f3067484ba8b1cfa5dbb5e1b7025ba}{ui}->label\_3->setText(\textcolor{stringliteral}{"Open"});
+48     \hyperlink{classHoymeMachines_a72f3067484ba8b1cfa5dbb5e1b7025ba}{ui}->label\_6->setText(\textcolor{stringliteral}{"0 minutes"});
+49 \}
+\end{DoxyCode}
+\hypertarget{classHoymeMachines_a34b497f41441b0dd94fc0181798daa92}{}\index{Hoyme\+Machines@{Hoyme\+Machines}!on\+\_\+push\+Button\+\_\+clicked@{on\+\_\+push\+Button\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+\_\+clicked@{on\+\_\+push\+Button\+\_\+clicked}!Hoyme\+Machines@{Hoyme\+Machines}}
+\subsubsection[{on\+\_\+push\+Button\+\_\+clicked}]{\setlength{\rightskip}{0pt plus 5cm}void Hoyme\+Machines\+::on\+\_\+push\+Button\+\_\+clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}\label{classHoymeMachines_a34b497f41441b0dd94fc0181798daa92}
+
+\begin{DoxyCode}
+31 \{
+32     \hyperlink{classCLIENT}{CLIENT} client1 (\textcolor{stringliteral}{"130.71.214.164"},25279, \textcolor{stringliteral}{"hmh-02-123-l"} );                       \textcolor{comment}{//make sure that
+       the ip address is right and that there is a server running with this socket number}
+33     \hyperlink{classHoymeMachines_a72f3067484ba8b1cfa5dbb5e1b7025ba}{ui}->washer\_1\_status->setText(QString(client1.returnMachineStatus().c\_str()));
+34     \hyperlink{classHoymeMachines_a72f3067484ba8b1cfa5dbb5e1b7025ba}{ui}->washer\_1\_timer->setText(QString(client1.returnMachineTimer().c\_str()));
+35 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classHoymeMachines_a72f3067484ba8b1cfa5dbb5e1b7025ba}{}\index{Hoyme\+Machines@{Hoyme\+Machines}!ui@{ui}}
+\index{ui@{ui}!Hoyme\+Machines@{Hoyme\+Machines}}
+\subsubsection[{ui}]{\setlength{\rightskip}{0pt plus 5cm}Ui\+::\+Hoyme\+Machines$\ast$ Hoyme\+Machines\+::ui\hspace{0.3cm}{\ttfamily [private]}}\label{classHoymeMachines_a72f3067484ba8b1cfa5dbb5e1b7025ba}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{hoymemachines_8h}{hoymemachines.\+h}\item 
+\hyperlink{hoymemachines_8cpp}{hoymemachines.\+cpp}\end{DoxyCompactItemize}

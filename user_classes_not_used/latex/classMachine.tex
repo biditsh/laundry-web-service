@@ -1,0 +1,206 @@
+\hypertarget{classMachine}{}\section{Machine Class Reference}
+\label{classMachine}\index{Machine@{Machine}}
+
+
+{\ttfamily \#include $<$machine.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMachine_a76cfdcb722a27b8ac4c28d23b3e6212b}{Machine} (const char $\ast$Machine\+Id\+N)
+\item 
+int \hyperlink{classMachine_afafc49fd188ba582bdd6a0ecd714fb79}{get\+Timer} (void)
+\item 
+bool \hyperlink{classMachine_ab36b6edda2cbd7ae642d849eeda58a6e}{get\+Status} (void)
+\item 
+void \hyperlink{classMachine_a09f13c6c9a88ed77ef83ec8cfdafada3}{error\+Report} (char $\ast$email\+Id)
+\item 
+void \hyperlink{classMachine_aa5d8ae35383f5957bcad59226d4a44ed}{set\+Notification} (char $\ast$email\+Id)
+\item 
+char $\ast$ \hyperlink{classMachine_ae59177ed732c7ee3d80797310efba80d}{get\+Machine\+Id} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classMachine_a87c0700309cbbba927df91207f29c91e}{pull\+Machine\+Id\+No} (const char $\ast$\hyperlink{classMachine_a3b65ac5d1d92eb6bb34302dea5e95260}{Machine\+Id})
+\item 
+char \hyperlink{classMachine_a47b70082f9d4417ae0d04b064eca7f11}{pull\+Machine\+Type} (const char $\ast$\hyperlink{classMachine_a3b65ac5d1d92eb6bb34302dea5e95260}{Machine\+Id})
+\item 
+char $\ast$ \hyperlink{classMachine_abb9fdde34f896ef4bd3eb7f77e3a999a}{makecopy} (const char $\ast$ch)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{classMachine_a3b65ac5d1d92eb6bb34302dea5e95260}{Machine\+Id}
+\item 
+char \hyperlink{classMachine_a30d834fcaad999f106704fdf7055156f}{Machine\+Type}
+\item 
+int \hyperlink{classMachine_a0bc94663d87633980e77d928adb96dad}{Machine\+Id\+No}
+\item 
+bool \hyperlink{classMachine_aa2bac9d075b6ceba0c90b063a9f3dd01}{status}
+\item 
+int \hyperlink{classMachine_a34e0ad8face9abb7206f74f421c4cb59}{timer}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classMachine_a76cfdcb722a27b8ac4c28d23b3e6212b}{}\index{Machine@{Machine}!Machine@{Machine}}
+\index{Machine@{Machine}!Machine@{Machine}}
+\subsubsection[{Machine(const char $\ast$\+Machine\+Id\+N)}]{\setlength{\rightskip}{0pt plus 5cm}Machine\+::\+Machine (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{Machine\+Id\+N}
+\end{DoxyParamCaption}
+)}\label{classMachine_a76cfdcb722a27b8ac4c28d23b3e6212b}
+
+\begin{DoxyCode}
+6                                        \{
+7         \hyperlink{classMachine_a3b65ac5d1d92eb6bb34302dea5e95260}{MachineId}=\hyperlink{classMachine_abb9fdde34f896ef4bd3eb7f77e3a999a}{makecopy}(MachineIdN);
+8         \hyperlink{classMachine_a30d834fcaad999f106704fdf7055156f}{MachineType}=\hyperlink{classMachine_a47b70082f9d4417ae0d04b064eca7f11}{pullMachineType}(MachineIdN);
+9         \hyperlink{classMachine_a0bc94663d87633980e77d928adb96dad}{MachineIdNo}=\hyperlink{classMachine_a87c0700309cbbba927df91207f29c91e}{pullMachineIdNo}(MachineIdN);
+10     \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classMachine_a09f13c6c9a88ed77ef83ec8cfdafada3}{}\index{Machine@{Machine}!error\+Report@{error\+Report}}
+\index{error\+Report@{error\+Report}!Machine@{Machine}}
+\subsubsection[{error\+Report(char $\ast$email\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}void Machine\+::error\+Report (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{email\+Id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classMachine_a09f13c6c9a88ed77ef83ec8cfdafada3}
+
+\begin{DoxyCode}
+50                                     \{
+51         \textcolor{comment}{//gotta find a way to email the AC}
+52     \}
+\end{DoxyCode}
+\hypertarget{classMachine_ae59177ed732c7ee3d80797310efba80d}{}\index{Machine@{Machine}!get\+Machine\+Id@{get\+Machine\+Id}}
+\index{get\+Machine\+Id@{get\+Machine\+Id}!Machine@{Machine}}
+\subsubsection[{get\+Machine\+Id(void)}]{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Machine\+::get\+Machine\+Id (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{classMachine_ae59177ed732c7ee3d80797310efba80d}
+
+\begin{DoxyCode}
+12                                 \{
+13         \textcolor{keywordflow}{return} \hyperlink{classMachine_a3b65ac5d1d92eb6bb34302dea5e95260}{MachineId};
+14     \}
+\end{DoxyCode}
+\hypertarget{classMachine_ab36b6edda2cbd7ae642d849eeda58a6e}{}\index{Machine@{Machine}!get\+Status@{get\+Status}}
+\index{get\+Status@{get\+Status}!Machine@{Machine}}
+\subsubsection[{get\+Status(void)}]{\setlength{\rightskip}{0pt plus 5cm}bool Machine\+::get\+Status (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classMachine_ab36b6edda2cbd7ae642d849eeda58a6e}
+
+\begin{DoxyCode}
+46                         \{
+47         \textcolor{keywordflow}{return} 0;
+48     \}
+\end{DoxyCode}
+\hypertarget{classMachine_afafc49fd188ba582bdd6a0ecd714fb79}{}\index{Machine@{Machine}!get\+Timer@{get\+Timer}}
+\index{get\+Timer@{get\+Timer}!Machine@{Machine}}
+\subsubsection[{get\+Timer(void)}]{\setlength{\rightskip}{0pt plus 5cm}int Machine\+::get\+Timer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classMachine_afafc49fd188ba582bdd6a0ecd714fb79}
+
+\begin{DoxyCode}
+41                       \{
+42         \textcolor{comment}{//gets the timer from the server -- not exactly sure how this is going to happen though}
+43         \textcolor{keywordflow}{return} 19;
+44     \}
+\end{DoxyCode}
+\hypertarget{classMachine_abb9fdde34f896ef4bd3eb7f77e3a999a}{}\index{Machine@{Machine}!makecopy@{makecopy}}
+\index{makecopy@{makecopy}!Machine@{Machine}}
+\subsubsection[{makecopy(const char $\ast$ch)}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Machine\+::makecopy (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{ch}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{classMachine_abb9fdde34f896ef4bd3eb7f77e3a999a}
+
+\begin{DoxyCode}
+28                                     \{        \textcolor{comment}{//the makecopy fuction to create copied of c style strings}
+29     \textcolor{keywordtype}{char} * newchar;
+30     \textcolor{keywordtype}{int} i=0;
+31     \textcolor{keywordflow}{for} (i=0; ch[i]!=\textcolor{charliteral}{'\(\backslash\)0'}; i++);
+32     newchar= \textcolor{keyword}{new} \textcolor{keywordtype}{char} [i+1];
+33     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<i+1; j++)
+34         newchar[j]=ch[j];
+35     \textcolor{keywordflow}{return} newchar;
+36     \}
+\end{DoxyCode}
+\hypertarget{classMachine_a87c0700309cbbba927df91207f29c91e}{}\index{Machine@{Machine}!pull\+Machine\+Id\+No@{pull\+Machine\+Id\+No}}
+\index{pull\+Machine\+Id\+No@{pull\+Machine\+Id\+No}!Machine@{Machine}}
+\subsubsection[{pull\+Machine\+Id\+No(const char $\ast$\+Machine\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}int Machine\+::pull\+Machine\+Id\+No (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{Machine\+Id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{classMachine_a87c0700309cbbba927df91207f29c91e}
+integer that stores the value of number shown in machine\textquotesingle{}s timer 
+\begin{DoxyCode}
+14                                                \{
+15     \textcolor{keywordtype}{char} num[4];
+16     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=7; i<10; i++)
+17         num[i-7]=\hyperlink{classMachine_a3b65ac5d1d92eb6bb34302dea5e95260}{MachineId}[i];
+18     num[3]=\textcolor{charliteral}{'\(\backslash\)0'};
+19     stringstream convert(num); 
+20     \textcolor{keywordtype}{int} r;
+21     convert>>r;
+22     \textcolor{keywordflow}{return} r;  \textcolor{comment}{//int r<<stringstream(num)}
+23     \}
+\end{DoxyCode}
+\hypertarget{classMachine_a47b70082f9d4417ae0d04b064eca7f11}{}\index{Machine@{Machine}!pull\+Machine\+Type@{pull\+Machine\+Type}}
+\index{pull\+Machine\+Type@{pull\+Machine\+Type}!Machine@{Machine}}
+\subsubsection[{pull\+Machine\+Type(const char $\ast$\+Machine\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}char Machine\+::pull\+Machine\+Type (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{Machine\+Id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{classMachine_a47b70082f9d4417ae0d04b064eca7f11}
+
+\begin{DoxyCode}
+24                                                 \{
+25     \textcolor{keywordflow}{return} \hyperlink{classMachine_a3b65ac5d1d92eb6bb34302dea5e95260}{MachineId}[11];           \textcolor{comment}{//ell-12-145-l}
+26     \}
+\end{DoxyCode}
+\hypertarget{classMachine_aa5d8ae35383f5957bcad59226d4a44ed}{}\index{Machine@{Machine}!set\+Notification@{set\+Notification}}
+\index{set\+Notification@{set\+Notification}!Machine@{Machine}}
+\subsubsection[{set\+Notification(char $\ast$email\+Id)}]{\setlength{\rightskip}{0pt plus 5cm}void Machine\+::set\+Notification (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{email\+Id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classMachine_aa5d8ae35383f5957bcad59226d4a44ed}
+
+\begin{DoxyCode}
+54                                         \{
+55         \textcolor{comment}{//gotta find a way to email the user}
+56     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classMachine_a3b65ac5d1d92eb6bb34302dea5e95260}{}\index{Machine@{Machine}!Machine\+Id@{Machine\+Id}}
+\index{Machine\+Id@{Machine\+Id}!Machine@{Machine}}
+\subsubsection[{Machine\+Id}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Machine\+::\+Machine\+Id\hspace{0.3cm}{\ttfamily [private]}}\label{classMachine_a3b65ac5d1d92eb6bb34302dea5e95260}
+\hypertarget{classMachine_a0bc94663d87633980e77d928adb96dad}{}\index{Machine@{Machine}!Machine\+Id\+No@{Machine\+Id\+No}}
+\index{Machine\+Id\+No@{Machine\+Id\+No}!Machine@{Machine}}
+\subsubsection[{Machine\+Id\+No}]{\setlength{\rightskip}{0pt plus 5cm}int Machine\+::\+Machine\+Id\+No\hspace{0.3cm}{\ttfamily [private]}}\label{classMachine_a0bc94663d87633980e77d928adb96dad}
+Type of machine, in the id, the last letter denotes it \hypertarget{classMachine_a30d834fcaad999f106704fdf7055156f}{}\index{Machine@{Machine}!Machine\+Type@{Machine\+Type}}
+\index{Machine\+Type@{Machine\+Type}!Machine@{Machine}}
+\subsubsection[{Machine\+Type}]{\setlength{\rightskip}{0pt plus 5cm}char Machine\+::\+Machine\+Type\hspace{0.3cm}{\ttfamily [private]}}\label{classMachine_a30d834fcaad999f106704fdf7055156f}
+The complete I\+D representing the machine ex. ell-\/2-\/123l \hypertarget{classMachine_aa2bac9d075b6ceba0c90b063a9f3dd01}{}\index{Machine@{Machine}!status@{status}}
+\index{status@{status}!Machine@{Machine}}
+\subsubsection[{status}]{\setlength{\rightskip}{0pt plus 5cm}bool Machine\+::status\hspace{0.3cm}{\ttfamily [private]}}\label{classMachine_aa2bac9d075b6ceba0c90b063a9f3dd01}
+Id number of machine, in the complete id, the numbers in last term denote it \hypertarget{classMachine_a34e0ad8face9abb7206f74f421c4cb59}{}\index{Machine@{Machine}!timer@{timer}}
+\index{timer@{timer}!Machine@{Machine}}
+\subsubsection[{timer}]{\setlength{\rightskip}{0pt plus 5cm}int Machine\+::timer\hspace{0.3cm}{\ttfamily [private]}}\label{classMachine_a34e0ad8face9abb7206f74f421c4cb59}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{machine_8h}{machine.\+h}\item 
+\hyperlink{machine_8cpp}{machine.\+cpp}\end{DoxyCompactItemize}

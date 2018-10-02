@@ -1,0 +1,139 @@
+\hypertarget{classMovementData}{}\section{Movement\+Data Class Reference}
+\label{classMovementData}\index{Movement\+Data@{Movement\+Data}}
+
+
+{\ttfamily \#include $<$Pi\+Classes.\+h$>$}
+
+Inheritance diagram for Movement\+Data\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMovementData}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMovementData_a0592d4c39f84928dfa2a27aba5851aaf}{Movement\+Data} (void)
+\item 
+bool \hyperlink{classMovementData_a0460eb813078fc9e9eef646bb495a8a3}{cont\+Vib\+Check} (istream \&file)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classMovementData_abd2ebde61b24ecee8634bc0ad5a9d79c}{C\+Y\+C\+L\+E\+D\+U\+R\+A\+T\+I\+O\+N} = 2 $\ast$ 60
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classMovementData_a8bd69fc477e461a1adee4cfa8762817b}{x} \mbox{[}2\mbox{]}
+\item 
+int \hyperlink{classMovementData_afefc24b91fda0633c33b916eb70a9177}{y} \mbox{[}2\mbox{]}
+\item 
+int \hyperlink{classMovementData_a319111ec5eb9f0adc4eda7e177e8eccd}{z} \mbox{[}2\mbox{]}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classMovementData_ac6c923b8f994f87231ec00efe4393333}{T\+E\+S\+T\+T\+I\+M\+E} = 10
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+inherited class of \hyperlink{classMachine}{Machine} class that deals with data from the sensor 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classMovementData_a0592d4c39f84928dfa2a27aba5851aaf}{}\index{Movement\+Data@{Movement\+Data}!Movement\+Data@{Movement\+Data}}
+\index{Movement\+Data@{Movement\+Data}!Movement\+Data@{Movement\+Data}}
+\subsubsection[{Movement\+Data(void)}]{\setlength{\rightskip}{0pt plus 5cm}Movement\+Data\+::\+Movement\+Data (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{classMovementData_a0592d4c39f84928dfa2a27aba5851aaf}
+static int to store the time in seconds for reading data pattern Constructor 
+\begin{DoxyCode}
+36                                : \hyperlink{classMachine_a80c3b107d589a615ff42f760a5d64b32}{Machine}() \{
+37   \textcolor{comment}{// MovementData::MovementData(void): Machine() \{}
+38   fill\_n(\hyperlink{classMovementData_a8bd69fc477e461a1adee4cfa8762817b}{x}, 2, 0);
+39   fill\_n(\hyperlink{classMovementData_afefc24b91fda0633c33b916eb70a9177}{y}, 2, 0);
+40   fill\_n(\hyperlink{classMovementData_a319111ec5eb9f0adc4eda7e177e8eccd}{z}, 2, 0);
+41 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classMovementData_a0460eb813078fc9e9eef646bb495a8a3}{}\index{Movement\+Data@{Movement\+Data}!cont\+Vib\+Check@{cont\+Vib\+Check}}
+\index{cont\+Vib\+Check@{cont\+Vib\+Check}!Movement\+Data@{Movement\+Data}}
+\subsubsection[{cont\+Vib\+Check(istream \&file)}]{\setlength{\rightskip}{0pt plus 5cm}bool Movement\+Data\+::cont\+Vib\+Check (
+\begin{DoxyParamCaption}
+\item[{istream \&}]{file}
+\end{DoxyParamCaption}
+)}\label{classMovementData_a0460eb813078fc9e9eef646bb495a8a3}
+method that checks the vibration pattern and analyzes it to decide if the machine\textquotesingle{}s vibration is continuous 
+\begin{DoxyParams}{Parameters}
+{\em reference} & to istream that represnts the address of serial port created by arduino \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+46                                              \{
+47   \textcolor{keywordtype}{string} data;
+48   \textcolor{keywordtype}{double} startTime = \hyperlink{classMachine_a2fb11e330fa5e2b6a7134ee55ac7ef43}{getCurrentTime}();
+49   \textcolor{keywordtype}{float} duration = 0;
+50   \textcolor{keywordtype}{int} i = 0;
+51   \textcolor{keywordtype}{int} vibct = 0;
+52   \textcolor{keywordflow}{while} (duration < \hyperlink{classMovementData_ac6c923b8f994f87231ec00efe4393333}{TESTTIME}) \{
+53     duration = \hyperlink{classMachine_a2fb11e330fa5e2b6a7134ee55ac7ef43}{getCurrentTime}() - startTime;
+54     cout << duration << endl;
+55     getline(file, data);
+56     sleep(0.8f);
+57     \textcolor{comment}{// MovementData::AddData(data);}
+58     \textcolor{comment}{// cout<<data<<endl;}
+59     \hyperlink{classMovementData_a8bd69fc477e461a1adee4cfa8762817b}{x}[0] = \hyperlink{classMovementData_a8bd69fc477e461a1adee4cfa8762817b}{x}[1];
+60     \hyperlink{classMovementData_afefc24b91fda0633c33b916eb70a9177}{y}[0] = \hyperlink{classMovementData_afefc24b91fda0633c33b916eb70a9177}{y}[1];
+61     \hyperlink{classMovementData_a319111ec5eb9f0adc4eda7e177e8eccd}{z}[0] = \hyperlink{classMovementData_a319111ec5eb9f0adc4eda7e177e8eccd}{z}[1];
+62     \textcolor{keywordflow}{if} (data.length() == 11) \{
+63       stringstream(data.substr(0, 3)) >> \hyperlink{classMovementData_a8bd69fc477e461a1adee4cfa8762817b}{x}[1];
+64       stringstream(data.substr(4, 3)) >> \hyperlink{classMovementData_afefc24b91fda0633c33b916eb70a9177}{y}[1];
+65       stringstream(data.substr(8, 3)) >> \hyperlink{classMovementData_a319111ec5eb9f0adc4eda7e177e8eccd}{z}[1];
+66     \}
+67 
+68     \textcolor{keywordflow}{if} (\hyperlink{classMovementData_a8bd69fc477e461a1adee4cfa8762817b}{x}[0] < \hyperlink{classMovementData_a8bd69fc477e461a1adee4cfa8762817b}{x}[1] - 2 || \hyperlink{classMovementData_a8bd69fc477e461a1adee4cfa8762817b}{x}[0] > \hyperlink{classMovementData_a8bd69fc477e461a1adee4cfa8762817b}{x}[1] + 2 || \hyperlink{classMovementData_afefc24b91fda0633c33b916eb70a9177}{y}[0] < \hyperlink{classMovementData_afefc24b91fda0633c33b916eb70a9177}{y}[1] - 2 ||
+69         \hyperlink{classMovementData_afefc24b91fda0633c33b916eb70a9177}{y}[0] > \hyperlink{classMovementData_afefc24b91fda0633c33b916eb70a9177}{y}[1] + 2 || \hyperlink{classMovementData_a319111ec5eb9f0adc4eda7e177e8eccd}{z}[0] < \hyperlink{classMovementData_a319111ec5eb9f0adc4eda7e177e8eccd}{z}[1] - 2 || \hyperlink{classMovementData_a319111ec5eb9f0adc4eda7e177e8eccd}{z}[0] > \hyperlink{classMovementData_a319111ec5eb9f0adc4eda7e177e8eccd}{z}[1] + 2) \{
+70       i++;
+71       vibct++;
+72       cout << \textcolor{stringliteral}{"motion detected"} << endl;
+73     \} \textcolor{keywordflow}{else}
+74       i++;
+75     \textcolor{comment}{// cout<<"not moving"<<endl;}
+76   \}
+77   \textcolor{keywordflow}{if} (((\textcolor{keywordtype}{float})vibct/(\textcolor{keywordtype}{float})i)>0.25)\{
+78     \textcolor{keywordflow}{return} 1;
+79   \} \textcolor{keywordflow}{else} \{
+80     \textcolor{keywordflow}{return} 0;
+81   \}
+82 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classMovementData_abd2ebde61b24ecee8634bc0ad5a9d79c}{}\index{Movement\+Data@{Movement\+Data}!C\+Y\+C\+L\+E\+D\+U\+R\+A\+T\+I\+O\+N@{C\+Y\+C\+L\+E\+D\+U\+R\+A\+T\+I\+O\+N}}
+\index{C\+Y\+C\+L\+E\+D\+U\+R\+A\+T\+I\+O\+N@{C\+Y\+C\+L\+E\+D\+U\+R\+A\+T\+I\+O\+N}!Movement\+Data@{Movement\+Data}}
+\subsubsection[{C\+Y\+C\+L\+E\+D\+U\+R\+A\+T\+I\+O\+N}]{\setlength{\rightskip}{0pt plus 5cm}int Movement\+Data\+::\+C\+Y\+C\+L\+E\+D\+U\+R\+A\+T\+I\+O\+N = 2 $\ast$ 60\hspace{0.3cm}{\ttfamily [static]}}\label{classMovementData_abd2ebde61b24ecee8634bc0ad5a9d79c}
+\hypertarget{classMovementData_ac6c923b8f994f87231ec00efe4393333}{}\index{Movement\+Data@{Movement\+Data}!T\+E\+S\+T\+T\+I\+M\+E@{T\+E\+S\+T\+T\+I\+M\+E}}
+\index{T\+E\+S\+T\+T\+I\+M\+E@{T\+E\+S\+T\+T\+I\+M\+E}!Movement\+Data@{Movement\+Data}}
+\subsubsection[{T\+E\+S\+T\+T\+I\+M\+E}]{\setlength{\rightskip}{0pt plus 5cm}int Movement\+Data\+::\+T\+E\+S\+T\+T\+I\+M\+E = 10\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{classMovementData_ac6c923b8f994f87231ec00efe4393333}
+stores the values of movement on z-\/ drection at that instant \hypertarget{classMovementData_a8bd69fc477e461a1adee4cfa8762817b}{}\index{Movement\+Data@{Movement\+Data}!x@{x}}
+\index{x@{x}!Movement\+Data@{Movement\+Data}}
+\subsubsection[{x}]{\setlength{\rightskip}{0pt plus 5cm}int Movement\+Data\+::x\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\label{classMovementData_a8bd69fc477e461a1adee4cfa8762817b}
+\hypertarget{classMovementData_afefc24b91fda0633c33b916eb70a9177}{}\index{Movement\+Data@{Movement\+Data}!y@{y}}
+\index{y@{y}!Movement\+Data@{Movement\+Data}}
+\subsubsection[{y}]{\setlength{\rightskip}{0pt plus 5cm}int Movement\+Data\+::y\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\label{classMovementData_afefc24b91fda0633c33b916eb70a9177}
+stores the values of movement on x-\/ drection at that instant \hypertarget{classMovementData_a319111ec5eb9f0adc4eda7e177e8eccd}{}\index{Movement\+Data@{Movement\+Data}!z@{z}}
+\index{z@{z}!Movement\+Data@{Movement\+Data}}
+\subsubsection[{z}]{\setlength{\rightskip}{0pt plus 5cm}int Movement\+Data\+::z\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\label{classMovementData_a319111ec5eb9f0adc4eda7e177e8eccd}
+stores the values of movement on y-\/ drection at that instant 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{PiClasses_8h}{Pi\+Classes.\+h}\item 
+\hyperlink{PiClasses_8cpp}{Pi\+Classes.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,219 @@
+\hypertarget{server_8cpp}{}\section{server.\+cpp File Reference}
+\label{server_8cpp}\index{server.\+cpp@{server.\+cpp}}
+
+
+Main program for multithreaded file server.  
+
+
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$cstring$>$}\\*
+{\ttfamily \#include $<$thread$>$}\\*
+{\ttfamily \#include \char`\"{}Worker.\+h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{server_8cpp_a150aa807a94411b028b908cde770e0fe}{M\+A\+X\+W\+O\+R\+K\+E\+R\+S}~10
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{server_8cpp_a54a4c7d17db93a6dda7546a073e61b72}{do\+Control} (\hyperlink{structControlData}{Control\+Data} $\ast$cdp, int port)
+\item 
+int \hyperlink{server_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Main program for multithreaded file server. 
+
+\begin{DoxyParagraph}{Usage Requires one command line arg\+: }
+
+\begin{DoxyEnumerate}
+\item port number to use (on this machine).
+\end{DoxyEnumerate}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Protocol (rules for correct communication)}
+
+\begin{DoxyItemize}
+\item {\itshape Server initialization}
+\begin{DoxyEnumerate}
+\item Server starts
+\item Server starts Servers\textquotesingle{} control thread
+\item Server initializes server socket, then blocks on accept()
+\end{DoxyEnumerate}
+\item {\itshape Client initialization}
+\begin{DoxyEnumerate}
+\item Server must be running and blocking on accept()
+\item Client starts and calls connect() (perhaps within a constructor)
+\item (Server\textquotesingle{}s accept generates server\textquotesingle{}s client socket)
+\item Server sends welcome message to Client
+\begin{DoxyItemize}
+\item {\ttfamily A\+C\+K} indicates success
+\item {\ttfamily N\+A\+C\+K} indicates failure, too many clients
+\item {\ttfamily D\+O\+N\+E} indicates client should terminate
+\end{DoxyItemize}
+\item Client receives welcome message; ~\newline
+ on success, Server allocates and records client thread
+\end{DoxyEnumerate}
+\item {\itshape Service operation}
+\begin{DoxyEnumerate}
+\item Client sends request message to Server~\newline
+ Supported service(s)\+:
+\begin{DoxyItemize}
+\item {\ttfamily M\+S\+G} followed by text
+\end{DoxyItemize}
+\item Server performs service, then sends response to Client
+\begin{DoxyItemize}
+\item {\ttfamily D\+O\+N\+E} indicates that Client should terminate
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+\item {\itshape Client termination}
+\begin{DoxyEnumerate}
+\item Client sends {\ttfamily E\+N\+D} message to Server
+\item Client ends;~\newline
+ Server performs join() on client thread, then deallocates and forgets it.
+\end{DoxyEnumerate}
+\item {\itshape Server termination}
+\begin{DoxyEnumerate}
+\item Server\textquotesingle{}s control thread detects E\+X\+I\+T condition (e.\+g., from stdin), then marks Server for termination (contin = 0)
+\item Server\textquotesingle{}s control thread performs {\itshape Client initialization}
+\item Server (main thread) detects termination and performs {\itshape Client termination} on every recorded Client
+\item Server\textquotesingle{}s control thread performs {\itshape Client termination}; Server (main thread) performs join() on Server\textquotesingle{}s control thread
+\item Server ends
+\end{DoxyEnumerate}
+\end{DoxyItemize}
+
+
+\end{DoxyParagraph}
+
+
+R\+A\+B 5/16 
+
+\subsection{Macro Definition Documentation}
+\hypertarget{server_8cpp_a150aa807a94411b028b908cde770e0fe}{}\index{server.\+cpp@{server.\+cpp}!M\+A\+X\+W\+O\+R\+K\+E\+R\+S@{M\+A\+X\+W\+O\+R\+K\+E\+R\+S}}
+\index{M\+A\+X\+W\+O\+R\+K\+E\+R\+S@{M\+A\+X\+W\+O\+R\+K\+E\+R\+S}!server.\+cpp@{server.\+cpp}}
+\subsubsection[{M\+A\+X\+W\+O\+R\+K\+E\+R\+S}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+W\+O\+R\+K\+E\+R\+S~10}\label{server_8cpp_a150aa807a94411b028b908cde770e0fe}
+
+
+\subsection{Function Documentation}
+\hypertarget{server_8cpp_a54a4c7d17db93a6dda7546a073e61b72}{}\index{server.\+cpp@{server.\+cpp}!do\+Control@{do\+Control}}
+\index{do\+Control@{do\+Control}!server.\+cpp@{server.\+cpp}}
+\subsubsection[{do\+Control(\+Control\+Data $\ast$cdp, int port)}]{\setlength{\rightskip}{0pt plus 5cm}void do\+Control (
+\begin{DoxyParamCaption}
+\item[{{\bf Control\+Data} $\ast$}]{cdp, }
+\item[{int}]{port}
+\end{DoxyParamCaption}
+)}\label{server_8cpp_a54a4c7d17db93a6dda7546a073e61b72}
+code for control thread 
+\begin{DoxyParams}{Parameters}
+{\em cdp} & points to shared data structure for controlling server \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+60                                            \{
+61   \textcolor{keyword}{const} \textcolor{keywordtype}{int} maxbuff = 100;
+62   \textcolor{keywordtype}{char} buff[maxbuff];
+63   \textcolor{keywordflow}{while} (cin.getline(buff, maxbuff-1)) \{
+64     \textcolor{keywordflow}{if} (strcmp(buff, \textcolor{stringliteral}{"EXIT"}) == 0) 
+65       \textcolor{keywordflow}{break};
+66     \textcolor{keywordflow}{else}
+67       cerr << \textcolor{stringliteral}{"[control thread] unrecognized command: "} << buff << endl;
+68   \}
+69   \textcolor{comment}{// assert:  buff == "EXIT"}
+70   cout << \textcolor{stringliteral}{"[control thread] EXIT encountered"} << endl;
+71   cdp->\hyperlink{structControlData_ac8fbf80345423cf5650ae64bfb10dc88}{contin} = 0;
+72   
+73   \textcolor{comment}{// initialize as a Client, to unblock [main] accept()}
+74   \hyperlink{classSocket}{Socket} sock(\textcolor{stringliteral}{"localhost"}, port);
+75   sock.recv(buff, maxbuff-1); \textcolor{comment}{// welcome message}
+76   
+77   \textcolor{comment}{// }
+78   sock.send(\textcolor{stringliteral}{"DONE"}, 4);
+79 \}
+\end{DoxyCode}
+\hypertarget{server_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{}\index{server.\+cpp@{server.\+cpp}!main@{main}}
+\index{main@{main}!server.\+cpp@{server.\+cpp}}
+\subsubsection[{main(int argc, char $\ast$$\ast$argv)}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\label{server_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
+
+\begin{DoxyCode}
+81                                 \{
+82   \textcolor{keywordtype}{char} *prog = argv[0];
+83   \textcolor{keywordtype}{int} port;
+84 
+85   \textcolor{keywordflow}{if} (argc < 2) \{
+86     cout << \textcolor{stringliteral}{"Usage:  "} << prog << \textcolor{stringliteral}{" port"} << endl;
+87     \textcolor{keywordflow}{return} 1;
+88   \}
+89   port = atoi(argv[1]);
+90 
+91   \hyperlink{classServerSocket}{ServerSocket} ssock(port);
+92   \textcolor{keywordflow}{if} (ssock.getBound())
+93     cout << \textcolor{stringliteral}{"[main] port "} << port << \textcolor{stringliteral}{" bound to server socket"} << endl;
+94   \textcolor{keywordflow}{else} \{
+95     cout << \textcolor{stringliteral}{"[main] could not bind port "} << port << \textcolor{stringliteral}{" to server socket, aborting"}
+96      << endl;
+97     \textcolor{keywordflow}{return} 1;
+98   \}
+99   \textcolor{comment}{// server socket ssock is now set up}
+100 
+101   \textcolor{comment}{/* Define shared data structure for controlling server */}
+102   \hyperlink{structControlData}{ControlData} controlData;
+103 
+104   \textcolor{comment}{/* Create a thread for handling control input */}
+105   thread controlThread(\hyperlink{server_8cpp_a54a4c7d17db93a6dda7546a073e61b72}{doControl}, &controlData, port);
+106   
+107   \textcolor{comment}{/* main loop: */}
+108   \hyperlink{classSocket}{Socket} *csockp;  \textcolor{comment}{// to hold new client socket}
+109   \hyperlink{classWorker}{Worker} *workers[\hyperlink{server_8cpp_a150aa807a94411b028b908cde770e0fe}{MAXWORKERS}];  
+110   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{server_8cpp_a150aa807a94411b028b908cde770e0fe}{MAXWORKERS};  i++)
+111     workers[i] = 0;
+112   \textcolor{keywordtype}{int} workerCount = 0;
+113   \textcolor{keywordflow}{while} (controlData.\hyperlink{structControlData_ac8fbf80345423cf5650ae64bfb10dc88}{contin}) \{
+114     csockp = ssock.accept();
+115 
+116     \textcolor{keywordtype}{int} indx;  \textcolor{comment}{// loop control for finding unused element in workers[] }
+117     \textcolor{keywordflow}{while} (indx < MAXWORKERS) \{
+118       \textcolor{keywordflow}{if} (workers[indx] != 0 && 
+119       workers[indx]->getState() == \hyperlink{Worker_8h_ab3804a8a4369184ad46dadf8e54957b6a9c954bcf443428c80b0f107b3bc48749}{ThreadState::DONE}) \{
+120     cout << \textcolor{stringliteral}{"[main] joining on ["} << workers[indx]->\hyperlink{classWorker_ac4629e67476bbb1daab8ed28545b8421}{getId}() << \textcolor{stringliteral}{"]"} << endl;
+121     workers[indx]->join();
+122     cout << \textcolor{stringliteral}{"[main] join on ["} << workers[indx]->\hyperlink{classWorker_ac4629e67476bbb1daab8ed28545b8421}{getId}() << \textcolor{stringliteral}{"] accomplished"} 
+123          << endl;
+124     \textcolor{keyword}{delete} workers[indx];
+125     workers[indx] = 0;
+126       \}
+127       \textcolor{keywordflow}{if} (workers[indx] == 0)
+128     \textcolor{keywordflow}{break};
+129       indx++;
+130     \}
+131     \textcolor{keywordflow}{if} (indx == MAXWORKERS) \{
+132       cout << \textcolor{stringliteral}{"[main] workers[] overfull, rejecting a new client"} << endl;
+133       csockp->\hyperlink{classSocket_aca3e5b9c5459a50bd8fb03d29ef9e48e}{send}(\textcolor{stringliteral}{"NACK"}, 4);
+134       \textcolor{keywordflow}{continue};
+135     \}
+136     \textcolor{comment}{// assert:  workers[indx] is available}
+137     workers[indx] = \textcolor{keyword}{new} \hyperlink{classWorker}{Worker}(workerCount++, csockp, &controlData);
+138   \}
+139 
+140   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0;  i < \hyperlink{server_8cpp_a150aa807a94411b028b908cde770e0fe}{MAXWORKERS};  i++)
+141     \textcolor{keywordflow}{if} (workers[i]) \{
+142       cout << \textcolor{stringliteral}{"[main] joining on ["} << workers[i]->\hyperlink{classWorker_ac4629e67476bbb1daab8ed28545b8421}{getId}() << \textcolor{stringliteral}{"]"} << endl;
+143     workers[i]->join();
+144     cout << \textcolor{stringliteral}{"[main] join on ["} << workers[i]->\hyperlink{classWorker_ac4629e67476bbb1daab8ed28545b8421}{getId}() << \textcolor{stringliteral}{"] accomplished"} 
+145          << endl;
+146     \textcolor{keyword}{delete} workers[i];
+147     workers[i] = 0;
+148     \}
+149   
+150   controlThread.join();
+151   cout << \textcolor{stringliteral}{"[main] control thread join accomplished"} << endl;
+152 
+153   \textcolor{keywordflow}{return} 0;
+154 \}
+\end{DoxyCode}

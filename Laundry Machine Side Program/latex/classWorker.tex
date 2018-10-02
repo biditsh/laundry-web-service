@@ -1,0 +1,197 @@
+\hypertarget{classWorker}{}\section{Worker Class Reference}
+\label{classWorker}\index{Worker@{Worker}}
+
+
+{\ttfamily \#include $<$Worker.\+h$>$}
+
+Inheritance diagram for Worker\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classWorker}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classWorker_ac26eb9ca6a086b77ad902a78de87f251}{Worker} (int i=-\/1, \hyperlink{classSocket}{Socket} $\ast$sp=0, const \hyperlink{structControlData}{Control\+Data} $\ast$cdp=0, const char Id\mbox{[}13\mbox{]}=\char`\"{}try-\/12-\/123-\/l\char`\"{})
+\item 
+\hyperlink{classWorker_aa8e4543ef1e93fd9d884269ba30c5bfe}{$\sim$\+Worker} ()
+\item 
+\hyperlink{Worker_8h_ab3804a8a4369184ad46dadf8e54957b6}{Thread\+State} \hyperlink{classWorker_a2ababbc935eb10458640d2441f5e0c95}{get\+State} ()
+\item 
+int \hyperlink{classWorker_ac4629e67476bbb1daab8ed28545b8421}{get\+Id} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classWorker_aeeb8e21ecb6687c34db1ad301028e41b}{do\+Work} (const \hyperlink{structControlData}{Control\+Data} $\ast$cdp)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classWorker_a50acebd9c077214060ff190bd54d351c}{id}
+\item 
+\hyperlink{classSocket}{Socket} $\ast$ \hyperlink{classWorker_a4562eb405aea20c7ac8a552e2075898f}{sockp}
+\item 
+\hyperlink{Worker_8h_ab3804a8a4369184ad46dadf8e54957b6}{Thread\+State} \hyperlink{classWorker_aeb90d4cd08a8a4759749c5388be8c78d}{state}
+\item 
+char \hyperlink{classWorker_a65e32331f68eabacf35ccad5f7cf127e}{Machine\+Id} \mbox{[}13\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class representing a thread that implements services for a client 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classWorker_ac26eb9ca6a086b77ad902a78de87f251}{}\index{Worker@{Worker}!Worker@{Worker}}
+\index{Worker@{Worker}!Worker@{Worker}}
+\subsubsection[{Worker(int i=-\/1, Socket $\ast$sp=0, const Control\+Data $\ast$cdp=0, const char Id[13]=""try-\/12-\/123-\/l"")}]{\setlength{\rightskip}{0pt plus 5cm}Worker\+::\+Worker (
+\begin{DoxyParamCaption}
+\item[{int}]{i = {\ttfamily -\/1}, }
+\item[{{\bf Socket} $\ast$}]{sp = {\ttfamily 0}, }
+\item[{const {\bf Control\+Data} $\ast$}]{cdp = {\ttfamily 0}, }
+\item[{const char}]{Id\mbox{[}13\mbox{]} = {\ttfamily \char`\"{}try-\/12-\/123-\/l\char`\"{}}}
+\end{DoxyParamCaption}
+)}\label{classWorker_ac26eb9ca6a086b77ad902a78de87f251}
+this is the Id of machine that\textquotesingle{}s connected 
+\begin{DoxyParams}{Parameters}
+{\em i} & I\+D number for this worker thread \\
+\hline
+{\em sp} & Pointer to socket for communicating with client \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+14     : thread(&\hyperlink{classWorker_aeeb8e21ecb6687c34db1ad301028e41b}{Worker::doWork}, \textcolor{keyword}{this}, cdp), \hyperlink{classWorker_a50acebd9c077214060ff190bd54d351c}{id}(i), \hyperlink{classWorker_a4562eb405aea20c7ac8a552e2075898f}{sockp}(sp), 
+      \hyperlink{classWorker_aeb90d4cd08a8a4759749c5388be8c78d}{state}(\hyperlink{Worker_8h_ab3804a8a4369184ad46dadf8e54957b6a1061be6c3fb88d32829cba6f6b2be304}{RUNNING}) \{
+15   cout << \textcolor{stringliteral}{"New Worker Connected."} << endl;
+16   strcpy(\hyperlink{classWorker_a65e32331f68eabacf35ccad5f7cf127e}{MachineId}, Id);
+17 \}
+\end{DoxyCode}
+\hypertarget{classWorker_aa8e4543ef1e93fd9d884269ba30c5bfe}{}\index{Worker@{Worker}!````~Worker@{$\sim$\+Worker}}
+\index{````~Worker@{$\sim$\+Worker}!Worker@{Worker}}
+\subsubsection[{$\sim$\+Worker()}]{\setlength{\rightskip}{0pt plus 5cm}Worker\+::$\sim$\+Worker (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classWorker_aa8e4543ef1e93fd9d884269ba30c5bfe}
+
+\begin{DoxyCode}
+24                 \{
+25   \textcolor{keyword}{delete} \hyperlink{classWorker_a4562eb405aea20c7ac8a552e2075898f}{sockp};
+26   \hyperlink{classWorker_a4562eb405aea20c7ac8a552e2075898f}{sockp} = 0;
+27 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classWorker_aeeb8e21ecb6687c34db1ad301028e41b}{}\index{Worker@{Worker}!do\+Work@{do\+Work}}
+\index{do\+Work@{do\+Work}!Worker@{Worker}}
+\subsubsection[{do\+Work(const Control\+Data $\ast$cdp)}]{\setlength{\rightskip}{0pt plus 5cm}void Worker\+::do\+Work (
+\begin{DoxyParamCaption}
+\item[{const {\bf Control\+Data} $\ast$}]{cdp}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classWorker_aeeb8e21ecb6687c34db1ad301028e41b}
+
+\begin{DoxyParams}{Parameters}
+{\em cdp} & Points to shared data structure for controlling server \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+29                                           \{
+30   \textcolor{keywordtype}{char} buff[\hyperlink{Worker_8cpp_a0c8dad16ba61ded55d3f302a616c0ced}{MAXBUFF}]; \textcolor{comment}{/* message buffer */}
+31   \textcolor{keywordtype}{int} ret; \textcolor{comment}{/* return value from a call */}
+32 
+33   \textcolor{comment}{// send welcome message}
+34   \textcolor{keywordflow}{if} (cdp->\hyperlink{structControlData_ac8fbf80345423cf5650ae64bfb10dc88}{contin}) \{
+35     strcpy(buff, \textcolor{stringliteral}{"ACK"});
+36   \} \textcolor{keywordflow}{else}
+37     strcpy(buff, \textcolor{stringliteral}{"DONE"});
+38   \hyperlink{classWorker_a4562eb405aea20c7ac8a552e2075898f}{sockp}->\hyperlink{classSocket_aca3e5b9c5459a50bd8fb03d29ef9e48e}{send}(buff, strlen(buff));
+39   \textcolor{keywordflow}{while} (strcmp(buff, \textcolor{stringliteral}{"DONE"}) != 0) \{
+40     ret = \hyperlink{classWorker_a4562eb405aea20c7ac8a552e2075898f}{sockp}->\hyperlink{classSocket_a1830972b26797cde234054f81f0921de}{recv}(buff, \hyperlink{Worker_8cpp_a0c8dad16ba61ded55d3f302a616c0ced}{MAXBUFF} - 1);
+41     buff[ret] = \textcolor{charliteral}{'\(\backslash\)0'}; \textcolor{comment}{// add terminating nullbyte to received array of char}
+42 
+43     \textcolor{keywordflow}{if} (strcmp(buff, \textcolor{stringliteral}{"DONE"}) == 0 || !cdp->\hyperlink{structControlData_ac8fbf80345423cf5650ae64bfb10dc88}{contin}) \{
+44       strcpy(buff, \textcolor{stringliteral}{"DONE"});
+45       \hyperlink{classWorker_a4562eb405aea20c7ac8a552e2075898f}{sockp}->\hyperlink{classSocket_aca3e5b9c5459a50bd8fb03d29ef9e48e}{send}(buff, 4);
+46       cout << \textcolor{stringliteral}{"["} << \textcolor{keywordtype}{id} << \textcolor{stringliteral}{"] sent termination message"} << endl;
+47     \}
+48 
+49     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (strncmp(buff, \hyperlink{classWorker_a65e32331f68eabacf35ccad5f7cf127e}{MachineId}, 12) == 0) \{
+50       ifstream file(\textcolor{stringliteral}{"status.dat"});
+51       \textcolor{keywordflow}{if} (file.good()) \{
+52         \textcolor{keywordtype}{string} firstline;
+53         getline(file, firstline);
+54         cout << \textcolor{stringliteral}{"sent:"} << firstline << endl; \textcolor{comment}{// if sensor thread doesn't find ttyACMx, it'll contain error
+       code for not finding sensor, otherwise status and timer is sent}
+55         \hyperlink{classWorker_a4562eb405aea20c7ac8a552e2075898f}{sockp}->\hyperlink{classSocket_aca3e5b9c5459a50bd8fb03d29ef9e48e}{send}(firstline.c\_str(), firstline.length());
+56         file.close();
+57       \} \textcolor{keywordflow}{else} \{
+58         \hyperlink{classWorker_a4562eb405aea20c7ac8a552e2075898f}{sockp}->\hyperlink{classSocket_aca3e5b9c5459a50bd8fb03d29ef9e48e}{send}(\textcolor{stringliteral}{"EPIC"},4); \textcolor{comment}{// error in Pi configuration, status.dat not found}
+59         cout << \textcolor{stringliteral}{"["} << \textcolor{keywordtype}{id} << \textcolor{stringliteral}{"]status file not found. EPIC sent"} << endl;
+60       \}
+61     \} \textcolor{keywordflow}{else} \{
+62       \hyperlink{classWorker_a4562eb405aea20c7ac8a552e2075898f}{sockp}->\hyperlink{classSocket_aca3e5b9c5459a50bd8fb03d29ef9e48e}{send}(\textcolor{stringliteral}{"WRCD"}, 4); \textcolor{comment}{// wrong machine code recieved, foolproof}
+63       cout << \textcolor{stringliteral}{"["} << \textcolor{keywordtype}{id} << \textcolor{stringliteral}{"] wrong machine code. WRCD sent"} << endl;
+64     \}
+65   \}
+66 
+67   \textcolor{comment}{// receive END message from client}
+68   \textcolor{keywordflow}{if} ((ret = \hyperlink{classWorker_a4562eb405aea20c7ac8a552e2075898f}{sockp}->\hyperlink{classSocket_a1830972b26797cde234054f81f0921de}{recv}(buff, \hyperlink{Worker_8cpp_a0c8dad16ba61ded55d3f302a616c0ced}{MAXBUFF} - 1)) != -1) \{
+69     buff[ret] = \textcolor{charliteral}{'\(\backslash\)0'};
+70     cout << \textcolor{stringliteral}{"["} << \textcolor{keywordtype}{id} << \textcolor{stringliteral}{"] Received "} << buff << \textcolor{stringliteral}{" from client"} << endl;
+71   \}
+72   \hyperlink{classWorker_aeb90d4cd08a8a4759749c5388be8c78d}{state} = \hyperlink{Worker_8h_ab3804a8a4369184ad46dadf8e54957b6a9c954bcf443428c80b0f107b3bc48749}{DONE};
+73 \}
+\end{DoxyCode}
+\hypertarget{classWorker_ac4629e67476bbb1daab8ed28545b8421}{}\index{Worker@{Worker}!get\+Id@{get\+Id}}
+\index{get\+Id@{get\+Id}!Worker@{Worker}}
+\subsubsection[{get\+Id()}]{\setlength{\rightskip}{0pt plus 5cm}int Worker\+::get\+Id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classWorker_ac4629e67476bbb1daab8ed28545b8421}
+
+\begin{DoxyCode}
+47               \{
+48     \textcolor{keywordflow}{return} \hyperlink{classWorker_a50acebd9c077214060ff190bd54d351c}{id};
+49     cout << \textcolor{stringliteral}{"y.2"} << endl;
+50   \}
+\end{DoxyCode}
+\hypertarget{classWorker_a2ababbc935eb10458640d2441f5e0c95}{}\index{Worker@{Worker}!get\+State@{get\+State}}
+\index{get\+State@{get\+State}!Worker@{Worker}}
+\subsubsection[{get\+State()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Thread\+State} Worker\+::get\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classWorker_a2ababbc935eb10458640d2441f5e0c95}
+
+\begin{DoxyCode}
+43                          \{
+44     \textcolor{keywordflow}{return} \hyperlink{classWorker_aeb90d4cd08a8a4759749c5388be8c78d}{state};
+45     cout << \textcolor{stringliteral}{"y.1"} << endl;
+46   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classWorker_a50acebd9c077214060ff190bd54d351c}{}\index{Worker@{Worker}!id@{id}}
+\index{id@{id}!Worker@{Worker}}
+\subsubsection[{id}]{\setlength{\rightskip}{0pt plus 5cm}int Worker\+::id\hspace{0.3cm}{\ttfamily [protected]}}\label{classWorker_a50acebd9c077214060ff190bd54d351c}
+unique identifier for this worker thread \hypertarget{classWorker_a65e32331f68eabacf35ccad5f7cf127e}{}\index{Worker@{Worker}!Machine\+Id@{Machine\+Id}}
+\index{Machine\+Id@{Machine\+Id}!Worker@{Worker}}
+\subsubsection[{Machine\+Id}]{\setlength{\rightskip}{0pt plus 5cm}char Worker\+::\+Machine\+Id\mbox{[}13\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\label{classWorker_a65e32331f68eabacf35ccad5f7cf127e}
+\hypertarget{classWorker_a4562eb405aea20c7ac8a552e2075898f}{}\index{Worker@{Worker}!sockp@{sockp}}
+\index{sockp@{sockp}!Worker@{Worker}}
+\subsubsection[{sockp}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Socket}$\ast$ Worker\+::sockp\hspace{0.3cm}{\ttfamily [protected]}}\label{classWorker_a4562eb405aea20c7ac8a552e2075898f}
+socket for communicating with client \hypertarget{classWorker_aeb90d4cd08a8a4759749c5388be8c78d}{}\index{Worker@{Worker}!state@{state}}
+\index{state@{state}!Worker@{Worker}}
+\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Thread\+State} Worker\+::state\hspace{0.3cm}{\ttfamily [protected]}}\label{classWorker_aeb90d4cd08a8a4759749c5388be8c78d}
+current status of this worker thread 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Worker_8h}{Worker.\+h}\item 
+\hyperlink{Worker_8cpp}{Worker.\+cpp}\end{DoxyCompactItemize}

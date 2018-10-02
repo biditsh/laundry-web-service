@@ -1,0 +1,311 @@
+\hypertarget{classSocket}{}\section{Socket Class Reference}
+\label{classSocket}\index{Socket@{Socket}}
+
+
+{\ttfamily \#include $<$Socket.\+h$>$}
+
+Inheritance diagram for Socket\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSocket}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSocket_a93c96fe7bea2fc834c88786629fa041e}{Socket} (int sd=-\/1)
+\item 
+\hyperlink{classSocket_aeac4eb6379a543d38ed88977d3b6630a}{$\sim$\+Socket} ()
+\item 
+\hyperlink{classSocket_a9016e6a1e5ae817f917449d5e3a7a380}{Socket} (const char $\ast$host, int port)
+\item 
+int \hyperlink{classSocket_abc97e53080c01a06cc8f5efea7c6cdf0}{connect} (const char $\ast$host, int port)
+\item 
+int \hyperlink{classSocket_aca3e5b9c5459a50bd8fb03d29ef9e48e}{send} (const char $\ast$msg, int len)
+\item 
+int \hyperlink{classSocket_a1830972b26797cde234054f81f0921de}{recv} (char $\ast$msg, int len)
+\item 
+void \hyperlink{classSocket_a75ee749264ccbcfc4dfbf5442e55dcb8}{close} ()
+\item 
+int \hyperlink{classSocket_a378077061dfb9c50e9db4b0d84ff2b03}{get\+Descriptor} ()
+\item 
+int \hyperlink{classSocket_a2b89fc6d75015cbf6abe93b2b9994ef4}{get\+Connected} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classSocket_a23f2fbf5f8449277c7d140f32d12fca3}{create\+\_\+socket} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classSocket_a457f5e3f2429eb859f9e80f064073874}{descrip}
+\item 
+int \hyperlink{classSocket_af04394b9f1235562146aaa9291df70f8}{connected}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class for socket communication 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSocket_a93c96fe7bea2fc834c88786629fa041e}{}\index{Socket@{Socket}!Socket@{Socket}}
+\index{Socket@{Socket}!Socket@{Socket}}
+\subsubsection[{Socket(int sd=-\/1)}]{\setlength{\rightskip}{0pt plus 5cm}Socket\+::\+Socket (
+\begin{DoxyParamCaption}
+\item[{int}]{sd = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)}\label{classSocket_a93c96fe7bea2fc834c88786629fa041e}
+
+\begin{DoxyCode}
+23                      \{
+24   \textcolor{keywordflow}{if} (sd == -1)
+25     \hyperlink{classSocket_a23f2fbf5f8449277c7d140f32d12fca3}{create\_socket}();
+26   \textcolor{keywordflow}{else} \{
+27     \hyperlink{classSocket_a457f5e3f2429eb859f9e80f064073874}{descrip} = sd;
+28     \textcolor{keyword}{struct }sockaddr\_in ca; \textcolor{comment}{// socket address structure for the new client}
+29     socklen\_t size = \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct }sockaddr);
+30     \textcolor{keywordflow}{if} (!::getpeername(sd, (\textcolor{keyword}{struct} sockaddr*) &ca, &size)) 
+31       \hyperlink{classSocket_af04394b9f1235562146aaa9291df70f8}{connected} = 1;
+32     \textcolor{keywordflow}{else} \{
+33       \hyperlink{classSocket_af04394b9f1235562146aaa9291df70f8}{connected} = 0;
+34       \textcolor{keywordflow}{if} (errno != ENOTCONN)
+35     cerr << \textcolor{stringliteral}{"Socket::Socket() getpeername "} << strerror(errno) << endl;
+36     \}
+37   \}
+38 \}
+\end{DoxyCode}
+\hypertarget{classSocket_aeac4eb6379a543d38ed88977d3b6630a}{}\index{Socket@{Socket}!````~Socket@{$\sim$\+Socket}}
+\index{````~Socket@{$\sim$\+Socket}!Socket@{Socket}}
+\subsubsection[{$\sim$\+Socket()}]{\setlength{\rightskip}{0pt plus 5cm}Socket\+::$\sim$\+Socket (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classSocket_aeac4eb6379a543d38ed88977d3b6630a}
+
+\begin{DoxyCode}
+45                 \{
+46   \hyperlink{classSocket_a75ee749264ccbcfc4dfbf5442e55dcb8}{close}();
+47 \}
+\end{DoxyCode}
+\hypertarget{classSocket_a9016e6a1e5ae817f917449d5e3a7a380}{}\index{Socket@{Socket}!Socket@{Socket}}
+\index{Socket@{Socket}!Socket@{Socket}}
+\subsubsection[{Socket(const char $\ast$host, int port)}]{\setlength{\rightskip}{0pt plus 5cm}Socket\+::\+Socket (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{host, }
+\item[{int}]{port}
+\end{DoxyParamCaption}
+)}\label{classSocket_a9016e6a1e5ae817f917449d5e3a7a380}
+initialize a socket and attempt to connect to a particular host and port 
+\begin{DoxyParams}{Parameters}
+{\em host} & Internet name for a computer, e.\+g., rns202-\/1.\+cs.\+stolaf.\+edu \\
+\hline
+{\em port} & T\+C\+P port for server socket on host \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+40                                          \{
+41   \hyperlink{classSocket_a23f2fbf5f8449277c7d140f32d12fca3}{create\_socket}();
+42   \hyperlink{classSocket_abc97e53080c01a06cc8f5efea7c6cdf0}{connect}(host, port);
+43 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSocket_a75ee749264ccbcfc4dfbf5442e55dcb8}{}\index{Socket@{Socket}!close@{close}}
+\index{close@{close}!Socket@{Socket}}
+\subsubsection[{close()}]{\setlength{\rightskip}{0pt plus 5cm}void Socket\+::close (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classSocket_a75ee749264ccbcfc4dfbf5442e55dcb8}
+Invalidate this socket for further use. If connected, first shut down communication. 
+\begin{DoxyCode}
+49                    \{
+50   \textcolor{keywordflow}{if} (\hyperlink{classSocket_af04394b9f1235562146aaa9291df70f8}{connected} and ::shutdown(\hyperlink{classSocket_a457f5e3f2429eb859f9e80f064073874}{descrip}, SHUT\_RDWR) < 0)
+51       cerr << \textcolor{stringliteral}{"Socket::close() shutdown "} << strerror(errno) << endl;
+52   \hyperlink{classSocket_af04394b9f1235562146aaa9291df70f8}{connected} = 0;
+53   \textcolor{keywordflow}{if} (::\hyperlink{classSocket_a75ee749264ccbcfc4dfbf5442e55dcb8}{close}(\hyperlink{classSocket_a457f5e3f2429eb859f9e80f064073874}{descrip}) < 0) 
+54     cerr << \textcolor{stringliteral}{"Socket::close() "} << strerror(errno) << endl;
+55   \textcolor{comment}{// cout << "closed socket <" << descrip << ">" << endl; // DEBUG}
+56 \}
+\end{DoxyCode}
+\hypertarget{classSocket_abc97e53080c01a06cc8f5efea7c6cdf0}{}\index{Socket@{Socket}!connect@{connect}}
+\index{connect@{connect}!Socket@{Socket}}
+\subsubsection[{connect(const char $\ast$host, int port)}]{\setlength{\rightskip}{0pt plus 5cm}int Socket\+::connect (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{host, }
+\item[{int}]{port}
+\end{DoxyParamCaption}
+)}\label{classSocket_abc97e53080c01a06cc8f5efea7c6cdf0}
+Connect this socket to a server \begin{DoxyPrecond}{Precondition}
+State variable connected must be assigned before calling this method 
+\end{DoxyPrecond}
+
+\begin{DoxyParams}{Parameters}
+{\em host} & Internet name for a computer, e.\+g., rns202-\/1.\+cs.\+stolaf.\+edu \\
+\hline
+{\em port} & T\+C\+P port for server socket on host \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+58                                               \{
+59   \textcolor{keywordflow}{if} (\hyperlink{classSocket_af04394b9f1235562146aaa9291df70f8}{connected}) \{
+60     cerr << \textcolor{stringliteral}{"Socket::connect() - already marked as connected, skipping"} << endl;
+61     \textcolor{keywordflow}{return} 0;
+62   \}
+63   \textcolor{comment}{// connected == 0}
+64 
+65   \textcolor{keyword}{struct }hostent *hp;
+66   \textcolor{keyword}{struct }sockaddr\_in sa;
+67   \textcolor{keywordflow}{if} ((hp = gethostbyname(host)) == NULL) \{
+68     cerr << \textcolor{stringliteral}{"Socket::connect() gethostbyname() "} << strerror(errno) << endl;
+69     \textcolor{keywordflow}{return} 0;
+70   \}
+71   memset((\textcolor{keywordtype}{char} *) &sa, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof}(sa));
+72   memcpy((\textcolor{keywordtype}{char} *) &sa.sin\_addr.s\_addr, hp->h\_addr, hp->h\_length);
+73   sa.sin\_family = AF\_INET;
+74   sa.sin\_port = htons(port);
+75   
+76   \textcolor{keywordflow}{if} (::\hyperlink{classSocket_abc97e53080c01a06cc8f5efea7c6cdf0}{connect}(\hyperlink{classSocket_a457f5e3f2429eb859f9e80f064073874}{descrip}, (\textcolor{keyword}{struct} sockaddr *) &sa, \textcolor{keyword}{sizeof}(sa)) < 0) \{
+77     cerr << \textcolor{stringliteral}{"Socket::connect() "} << strerror(errno) << endl;
+78     \textcolor{keywordflow}{if} (errno == EISCONN)
+79       \hyperlink{classSocket_af04394b9f1235562146aaa9291df70f8}{connected} = 1;
+80     \textcolor{keywordflow}{return} 0;
+81   \}
+82   \hyperlink{classSocket_af04394b9f1235562146aaa9291df70f8}{connected} = 1;
+83   \textcolor{keywordflow}{return} 1;  
+84 \}
+\end{DoxyCode}
+\hypertarget{classSocket_a23f2fbf5f8449277c7d140f32d12fca3}{}\index{Socket@{Socket}!create\+\_\+socket@{create\+\_\+socket}}
+\index{create\+\_\+socket@{create\+\_\+socket}!Socket@{Socket}}
+\subsubsection[{create\+\_\+socket()}]{\setlength{\rightskip}{0pt plus 5cm}void Socket\+::create\+\_\+socket (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classSocket_a23f2fbf5f8449277c7d140f32d12fca3}
+helper method for socket initialization \begin{DoxyParagraph}{State Changes}
+Initialize descrip, and assign 0 to connected 
+\end{DoxyParagraph}
+
+\begin{DoxyCode}
+17                            \{
+18   \textcolor{keywordflow}{if} ((\hyperlink{classSocket_a457f5e3f2429eb859f9e80f064073874}{descrip} = socket(AF\_INET, SOCK\_STREAM, 0)) < 0) 
+19     cerr << \textcolor{stringliteral}{"Socket::Socket():"} << strerror(errno) << endl;
+20   \hyperlink{classSocket_af04394b9f1235562146aaa9291df70f8}{connected} = 0;
+21 \}
+\end{DoxyCode}
+\hypertarget{classSocket_a2b89fc6d75015cbf6abe93b2b9994ef4}{}\index{Socket@{Socket}!get\+Connected@{get\+Connected}}
+\index{get\+Connected@{get\+Connected}!Socket@{Socket}}
+\subsubsection[{get\+Connected()}]{\setlength{\rightskip}{0pt plus 5cm}int Socket\+::get\+Connected (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classSocket_a2b89fc6d75015cbf6abe93b2b9994ef4}
+\begin{DoxyReturn}{Returns}
+Value of state variable connected 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+50 \{ \textcolor{keywordflow}{return} \hyperlink{classSocket_af04394b9f1235562146aaa9291df70f8}{connected}; \} 
+\end{DoxyCode}
+\hypertarget{classSocket_a378077061dfb9c50e9db4b0d84ff2b03}{}\index{Socket@{Socket}!get\+Descriptor@{get\+Descriptor}}
+\index{get\+Descriptor@{get\+Descriptor}!Socket@{Socket}}
+\subsubsection[{get\+Descriptor()}]{\setlength{\rightskip}{0pt plus 5cm}int Socket\+::get\+Descriptor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classSocket_a378077061dfb9c50e9db4b0d84ff2b03}
+\begin{DoxyReturn}{Returns}
+Value of state variable descrip 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+47 \{ \textcolor{keywordflow}{return} \hyperlink{classSocket_a457f5e3f2429eb859f9e80f064073874}{descrip}; \} 
+\end{DoxyCode}
+\hypertarget{classSocket_a1830972b26797cde234054f81f0921de}{}\index{Socket@{Socket}!recv@{recv}}
+\index{recv@{recv}!Socket@{Socket}}
+\subsubsection[{recv(char $\ast$msg, int len)}]{\setlength{\rightskip}{0pt plus 5cm}int Socket\+::recv (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{msg, }
+\item[{int}]{len}
+\end{DoxyParamCaption}
+)}\label{classSocket_a1830972b26797cde234054f81f0921de}
+Receive a message on this socket 
+\begin{DoxyParams}{Parameters}
+{\em buff} & Array to receive message \\
+\hline
+{\em len} & Maximum number of characters to receive in buff \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of characters transmitted, or -\/1 on failure 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+99                                     \{
+100   \textcolor{keywordflow}{if} (!\hyperlink{classSocket_af04394b9f1235562146aaa9291df70f8}{connected}) \{
+101     cerr << \textcolor{stringliteral}{"Attempt to recv() on a disconnected Socket"} << endl;
+102     \textcolor{keywordflow}{return} -1;
+103   \}
+104 
+105   \textcolor{keywordtype}{int} ret;
+106   \textcolor{keywordflow}{if} ((ret = ::\hyperlink{classSocket_a1830972b26797cde234054f81f0921de}{recv}(\hyperlink{classSocket_a457f5e3f2429eb859f9e80f064073874}{descrip}, buff, len, 0)) < 0) \{
+107     cerr << \textcolor{stringliteral}{"Socket::recv() "} << strerror(errno) << endl;
+108     \textcolor{keywordflow}{return} -1;
+109   \}
+110   \textcolor{keywordflow}{return} ret;
+111 \}
+\end{DoxyCode}
+\hypertarget{classSocket_aca3e5b9c5459a50bd8fb03d29ef9e48e}{}\index{Socket@{Socket}!send@{send}}
+\index{send@{send}!Socket@{Socket}}
+\subsubsection[{send(const char $\ast$msg, int len)}]{\setlength{\rightskip}{0pt plus 5cm}int Socket\+::send (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{msg, }
+\item[{int}]{len}
+\end{DoxyParamCaption}
+)}\label{classSocket_aca3e5b9c5459a50bd8fb03d29ef9e48e}
+Send a message on this socket 
+\begin{DoxyParams}{Parameters}
+{\em msg} & Message to be transmitted \\
+\hline
+{\em len} & Number of characters of msg to transmit \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of characters transmitted, or -\/1 on failure 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+87                                          \{
+88   \textcolor{keywordflow}{if} (!\hyperlink{classSocket_af04394b9f1235562146aaa9291df70f8}{connected}) \{
+89     cerr << \textcolor{stringliteral}{"Attempt to send() on a disconnected Socket"} << endl;
+90     \textcolor{keywordflow}{return} -1;
+91   \}
+92 
+93   \textcolor{keywordtype}{int} ret;
+94   \textcolor{keywordflow}{if} ((ret = ::\hyperlink{classSocket_aca3e5b9c5459a50bd8fb03d29ef9e48e}{send}(\hyperlink{classSocket_a457f5e3f2429eb859f9e80f064073874}{descrip}, msg, len, 0)) < 0) 
+95     cerr << \textcolor{stringliteral}{"Socket::send() "} << strerror(errno) << endl;
+96   \textcolor{keywordflow}{return} ret;
+97 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classSocket_af04394b9f1235562146aaa9291df70f8}{}\index{Socket@{Socket}!connected@{connected}}
+\index{connected@{connected}!Socket@{Socket}}
+\subsubsection[{connected}]{\setlength{\rightskip}{0pt plus 5cm}int Socket\+::connected\hspace{0.3cm}{\ttfamily [protected]}}\label{classSocket_af04394b9f1235562146aaa9291df70f8}
+non-\/zero if \hyperlink{classSocket_abc97e53080c01a06cc8f5efea7c6cdf0}{connect()} succeeded on this socket \hypertarget{classSocket_a457f5e3f2429eb859f9e80f064073874}{}\index{Socket@{Socket}!descrip@{descrip}}
+\index{descrip@{descrip}!Socket@{Socket}}
+\subsubsection[{descrip}]{\setlength{\rightskip}{0pt plus 5cm}int Socket\+::descrip\hspace{0.3cm}{\ttfamily [protected]}}\label{classSocket_a457f5e3f2429eb859f9e80f064073874}
+socket descriptor, or -\/1 if failed to allocate socket 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Socket_8h}{Socket.\+h}\item 
+\hyperlink{Socket_8cpp}{Socket.\+cpp}\end{DoxyCompactItemize}

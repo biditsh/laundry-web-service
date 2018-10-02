@@ -1,0 +1,19 @@
+README
+
+To install Laundry Web Service Client Program in your computer, please follow the steps below:
+
+1) Open Laundry.pro using QT creator.
+2) Click on the run debug button(green arrow button at the left bottom)
+
+This will breate a folder named Laundry_Debug in the working directory. It contains the makefile.
+
+4) Open the directory using the terminal and type make.
+
+	computer% make
+
+This will compile the program. You can access the program by clicking the executable program Laundry in that folder or typing ./Laundry using UNIX Terminal. 
+
+If any changes need to be done to the buttons or the socket number you can do it by modifying the code in HoymeMachines class using QT Creator or other text editing software. 
+
+
+Thanks for using Laundry Web Service.

@@ -1,0 +1,108 @@
+\hypertarget{classHoymeFloors}{}\section{Hoyme\+Floors Class Reference}
+\label{classHoymeFloors}\index{Hoyme\+Floors@{Hoyme\+Floors}}
+
+
+{\ttfamily \#include $<$hoymefloors.\+h$>$}
+
+Inheritance diagram for Hoyme\+Floors\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classHoymeFloors}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHoymeFloors_a708e4152c6f1de58b3d4c2b8cd1a2cac}{Hoyme\+Floors} (Q\+Widget $\ast$parent=0)
+\item 
+\hyperlink{classHoymeFloors_a22b8863dcc7cabf61e3a5f6221f9fc69}{$\sim$\+Hoyme\+Floors} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classHoymeFloors_ab07d53faecc2b6d9afa20ce673bbfeb8}{on\+\_\+push\+Button\+\_\+clicked} ()
+\item 
+void \hyperlink{classHoymeFloors_a2c34701acc5383216634845ee813dcf9}{on\+\_\+push\+Button\+\_\+2\+\_\+clicked} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Hoyme\+Floors $\ast$ \hyperlink{classHoymeFloors_ade5233dfacee00a835b2be807e2ec239}{ui}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classHoymeFloors_a708e4152c6f1de58b3d4c2b8cd1a2cac}{}\index{Hoyme\+Floors@{Hoyme\+Floors}!Hoyme\+Floors@{Hoyme\+Floors}}
+\index{Hoyme\+Floors@{Hoyme\+Floors}!Hoyme\+Floors@{Hoyme\+Floors}}
+\subsubsection[{Hoyme\+Floors(\+Q\+Widget $\ast$parent=0)}]{\setlength{\rightskip}{0pt plus 5cm}Hoyme\+Floors\+::\+Hoyme\+Floors (
+\begin{DoxyParamCaption}
+\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classHoymeFloors_a708e4152c6f1de58b3d4c2b8cd1a2cac}
+
+\begin{DoxyCode}
+6                                         :
+7     QDialog(parent),
+8     \hyperlink{classHoymeFloors_ade5233dfacee00a835b2be807e2ec239}{ui}(\textcolor{keyword}{new} Ui::HoymeFloors)
+9 \{
+10     \hyperlink{classHoymeFloors_ade5233dfacee00a835b2be807e2ec239}{ui}->setupUi(\textcolor{keyword}{this});
+11 \}
+\end{DoxyCode}
+\hypertarget{classHoymeFloors_a22b8863dcc7cabf61e3a5f6221f9fc69}{}\index{Hoyme\+Floors@{Hoyme\+Floors}!````~Hoyme\+Floors@{$\sim$\+Hoyme\+Floors}}
+\index{````~Hoyme\+Floors@{$\sim$\+Hoyme\+Floors}!Hoyme\+Floors@{Hoyme\+Floors}}
+\subsubsection[{$\sim$\+Hoyme\+Floors()}]{\setlength{\rightskip}{0pt plus 5cm}Hoyme\+Floors\+::$\sim$\+Hoyme\+Floors (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classHoymeFloors_a22b8863dcc7cabf61e3a5f6221f9fc69}
+
+\begin{DoxyCode}
+14 \{
+15     \textcolor{keyword}{delete} \hyperlink{classHoymeFloors_ade5233dfacee00a835b2be807e2ec239}{ui};
+16 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classHoymeFloors_a2c34701acc5383216634845ee813dcf9}{}\index{Hoyme\+Floors@{Hoyme\+Floors}!on\+\_\+push\+Button\+\_\+2\+\_\+clicked@{on\+\_\+push\+Button\+\_\+2\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+\_\+2\+\_\+clicked@{on\+\_\+push\+Button\+\_\+2\+\_\+clicked}!Hoyme\+Floors@{Hoyme\+Floors}}
+\subsubsection[{on\+\_\+push\+Button\+\_\+2\+\_\+clicked}]{\setlength{\rightskip}{0pt plus 5cm}void Hoyme\+Floors\+::on\+\_\+push\+Button\+\_\+2\+\_\+clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}\label{classHoymeFloors_a2c34701acc5383216634845ee813dcf9}
+
+\begin{DoxyCode}
+26 \{
+27     \hyperlink{classHoymeMachines2}{HoymeMachines2} hMch2;
+28     hMch2.setModal(\textcolor{keyword}{true});
+29     hMch2.exec();
+30 \}
+\end{DoxyCode}
+\hypertarget{classHoymeFloors_ab07d53faecc2b6d9afa20ce673bbfeb8}{}\index{Hoyme\+Floors@{Hoyme\+Floors}!on\+\_\+push\+Button\+\_\+clicked@{on\+\_\+push\+Button\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+\_\+clicked@{on\+\_\+push\+Button\+\_\+clicked}!Hoyme\+Floors@{Hoyme\+Floors}}
+\subsubsection[{on\+\_\+push\+Button\+\_\+clicked}]{\setlength{\rightskip}{0pt plus 5cm}void Hoyme\+Floors\+::on\+\_\+push\+Button\+\_\+clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}\label{classHoymeFloors_ab07d53faecc2b6d9afa20ce673bbfeb8}
+
+\begin{DoxyCode}
+19 \{
+20     \hyperlink{classHoymeMachines}{HoymeMachines} hMch;
+21     hMch.setModal(\textcolor{keyword}{true});
+22     hMch.exec();
+23 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classHoymeFloors_ade5233dfacee00a835b2be807e2ec239}{}\index{Hoyme\+Floors@{Hoyme\+Floors}!ui@{ui}}
+\index{ui@{ui}!Hoyme\+Floors@{Hoyme\+Floors}}
+\subsubsection[{ui}]{\setlength{\rightskip}{0pt plus 5cm}Ui\+::\+Hoyme\+Floors$\ast$ Hoyme\+Floors\+::ui\hspace{0.3cm}{\ttfamily [private]}}\label{classHoymeFloors_ade5233dfacee00a835b2be807e2ec239}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{hoymefloors_8h}{hoymefloors.\+h}\item 
+\hyperlink{hoymefloors_8cpp}{hoymefloors.\+cpp}\end{DoxyCompactItemize}

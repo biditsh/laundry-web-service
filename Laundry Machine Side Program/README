@@ -1,0 +1,13 @@
+Thanks for using Laundry Web Service. This installation package is made for the server side computer (Laundry Machine side). This README file will guide you through the steps to install this program in your Raspberry Pi. 
+
+Please follow the given steps:
+
+1) Upload the required sketch into your Arduino and connect it to the accelerometer sensor. You can find further information about this process in a README file inside the folder acceletometer. 
+
+2) Open your UNIX terminal in this folder and type make.
+     computer% make
+
+3) To set up the machine, network socket and serial port, open the file idfile.dat and edit the values as directed in the file. 
+
+The set up of your program is now complete. You can this program (Server Side) by entering ./pro4 in your terminal
+	computer% ./pro4

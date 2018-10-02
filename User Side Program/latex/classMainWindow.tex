@@ -1,0 +1,123 @@
+\hypertarget{classMainWindow}{}\section{Main\+Window Class Reference}
+\label{classMainWindow}\index{Main\+Window@{Main\+Window}}
+
+
+{\ttfamily \#include $<$mainwindow.\+h$>$}
+
+Inheritance diagram for Main\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMainWindow}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMainWindow_a8b244be8b7b7db1b08de2a2acb9409db}{Main\+Window} (Q\+Widget $\ast$parent=0)
+\item 
+\hyperlink{classMainWindow_ae98d00a93bc118200eeef9f9bba1dba7}{$\sim$\+Main\+Window} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classMainWindow_ae907ba21cd47c6903e2744fd24cfeb78}{on\+\_\+push\+Button\+\_\+9\+\_\+clicked} ()
+\item 
+void \hyperlink{classMainWindow_a4de79c63c7fa0b8d7c468ac71f20be81}{on\+\_\+push\+Button\+\_\+clicked} ()
+\item 
+void \hyperlink{classMainWindow_ae0e46dc3da4ee07bf66e73e20300220c}{on\+\_\+push\+Button\+\_\+2\+\_\+clicked} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Main\+Window $\ast$ \hyperlink{classMainWindow_a35466a70ed47252a0191168126a352a5}{ui}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classMainWindow_a8b244be8b7b7db1b08de2a2acb9409db}{}\index{Main\+Window@{Main\+Window}!Main\+Window@{Main\+Window}}
+\index{Main\+Window@{Main\+Window}!Main\+Window@{Main\+Window}}
+\subsubsection[{Main\+Window(\+Q\+Widget $\ast$parent=0)}]{\setlength{\rightskip}{0pt plus 5cm}Main\+Window\+::\+Main\+Window (
+\begin{DoxyParamCaption}
+\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{classMainWindow_a8b244be8b7b7db1b08de2a2acb9409db}
+
+\begin{DoxyCode}
+11                                       :
+12     QMainWindow(parent),
+13     \hyperlink{classMainWindow_a35466a70ed47252a0191168126a352a5}{ui}(\textcolor{keyword}{new} Ui::MainWindow)
+14 \{
+15     \hyperlink{classMainWindow_a35466a70ed47252a0191168126a352a5}{ui}->setupUi(\textcolor{keyword}{this});
+16 \}
+\end{DoxyCode}
+\hypertarget{classMainWindow_ae98d00a93bc118200eeef9f9bba1dba7}{}\index{Main\+Window@{Main\+Window}!````~Main\+Window@{$\sim$\+Main\+Window}}
+\index{````~Main\+Window@{$\sim$\+Main\+Window}!Main\+Window@{Main\+Window}}
+\subsubsection[{$\sim$\+Main\+Window()}]{\setlength{\rightskip}{0pt plus 5cm}Main\+Window\+::$\sim$\+Main\+Window (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classMainWindow_ae98d00a93bc118200eeef9f9bba1dba7}
+
+\begin{DoxyCode}
+19 \{
+20     \textcolor{keyword}{delete} \hyperlink{classMainWindow_a35466a70ed47252a0191168126a352a5}{ui};
+21 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classMainWindow_ae0e46dc3da4ee07bf66e73e20300220c}{}\index{Main\+Window@{Main\+Window}!on\+\_\+push\+Button\+\_\+2\+\_\+clicked@{on\+\_\+push\+Button\+\_\+2\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+\_\+2\+\_\+clicked@{on\+\_\+push\+Button\+\_\+2\+\_\+clicked}!Main\+Window@{Main\+Window}}
+\subsubsection[{on\+\_\+push\+Button\+\_\+2\+\_\+clicked}]{\setlength{\rightskip}{0pt plus 5cm}void Main\+Window\+::on\+\_\+push\+Button\+\_\+2\+\_\+clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}\label{classMainWindow_ae0e46dc3da4ee07bf66e73e20300220c}
+
+\begin{DoxyCode}
+37 \{
+38     QString link = \textcolor{stringliteral}{"http://www.cs.stolaf.edu/wiki/images/2/2e/LaundryWebServiceUseM.pdf"};
+39     QDesktopServices::openUrl(QUrl(link));
+40 \}
+\end{DoxyCode}
+\hypertarget{classMainWindow_ae907ba21cd47c6903e2744fd24cfeb78}{}\index{Main\+Window@{Main\+Window}!on\+\_\+push\+Button\+\_\+9\+\_\+clicked@{on\+\_\+push\+Button\+\_\+9\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+\_\+9\+\_\+clicked@{on\+\_\+push\+Button\+\_\+9\+\_\+clicked}!Main\+Window@{Main\+Window}}
+\subsubsection[{on\+\_\+push\+Button\+\_\+9\+\_\+clicked}]{\setlength{\rightskip}{0pt plus 5cm}void Main\+Window\+::on\+\_\+push\+Button\+\_\+9\+\_\+clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}\label{classMainWindow_ae907ba21cd47c6903e2744fd24cfeb78}
+
+\begin{DoxyCode}
+24 \{
+25     \hyperlink{classHoymeFloors}{HoymeFloors} hFl;
+26     hFl.setModal(\textcolor{keyword}{true});
+27     hFl.exec();
+28 \}
+\end{DoxyCode}
+\hypertarget{classMainWindow_a4de79c63c7fa0b8d7c468ac71f20be81}{}\index{Main\+Window@{Main\+Window}!on\+\_\+push\+Button\+\_\+clicked@{on\+\_\+push\+Button\+\_\+clicked}}
+\index{on\+\_\+push\+Button\+\_\+clicked@{on\+\_\+push\+Button\+\_\+clicked}!Main\+Window@{Main\+Window}}
+\subsubsection[{on\+\_\+push\+Button\+\_\+clicked}]{\setlength{\rightskip}{0pt plus 5cm}void Main\+Window\+::on\+\_\+push\+Button\+\_\+clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}\label{classMainWindow_a4de79c63c7fa0b8d7c468ac71f20be81}
+
+\begin{DoxyCode}
+31 \{
+32     QString link = \textcolor{stringliteral}{"http://www.cs.stolaf.edu/wiki/index.php/LaundryB"};
+33     QDesktopServices::openUrl(QUrl(link));
+34 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classMainWindow_a35466a70ed47252a0191168126a352a5}{}\index{Main\+Window@{Main\+Window}!ui@{ui}}
+\index{ui@{ui}!Main\+Window@{Main\+Window}}
+\subsubsection[{ui}]{\setlength{\rightskip}{0pt plus 5cm}Ui\+::\+Main\+Window$\ast$ Main\+Window\+::ui\hspace{0.3cm}{\ttfamily [private]}}\label{classMainWindow_a35466a70ed47252a0191168126a352a5}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{mainwindow_8h}{mainwindow.\+h}\item 
+\hyperlink{mainwindow_8cpp}{mainwindow.\+cpp}\end{DoxyCompactItemize}
